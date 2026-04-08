@@ -3,20 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SIR Adjudicated Data Repository | Sabar Institute</title>
+<title>Domkal Constituency — Booth Analysis 2021–2024 | Sabar Institute</title>
 
-<!-- ── Favicon (matching Domkal approach) ──────────────────────────────── -->
+<!-- ── Favicon (SVG works in all modern browsers) ──────────────────────── -->
 <link rel="icon" type="image/svg+xml" href="https://sabarinstitute.org/wp-content/uploads/2025/10/svgviewer-output.svg">
 <link rel="shortcut icon" href="https://sabarinstitute.org/wp-content/uploads/2025/10/svgviewer-output.svg">
 <link rel="apple-touch-icon" href="https://sabarinstitute.org/wp-content/uploads/2025/10/svgviewer-output.svg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<!-- ── Open Graph (WhatsApp, Telegram, LinkedIn, Facebook preview) ───────── -->
+<meta property="og:type"        content="article">
+<meta property="og:title"       content="Domkal Constituency — Booth-Level Analysis 2021→2024">
+<meta property="og:description" content="280-booth electoral shift analysis for Domkal AC (Murshidabad). TMC −7.6pp, CPM +7.3pp. 66 reversals. Offset-corrected mapping. Published by Sabar Institute.">
+<meta property="og:url"         content="https://sabar-institute.github.io/reports/domkal/">
+<meta property="og:image"       content="https://sabarinstitute.org/wp-content/uploads/2025/07/Sabar-Institute-1.png">
+<meta property="og:image:type"  content="image/png">
+<meta property="og:site_name"   content="Sabar Institute">
+
+<!-- ── Twitter / X card ─────────────────────────────────────────────────── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Domkal Constituency — Booth-Level Analysis 2021→2024">
+<meta name="twitter:description" content="280-booth electoral shift. TMC −7.6pp, CPM +7.3pp. 66 TMC→CPM reversals. Offset-corrected booth mapping. By Sabar Institute.">
+<meta name="twitter:image"       content="https://sabarinstitute.org/wp-content/uploads/2025/07/Sabar-Institute-1.png">
+
+<!-- ── General SEO ──────────────────────────────────────────────────────── -->
+<meta name="description" content="Booth-level vote share analysis for Domkal Assembly Constituency (AC 75, Murshidabad) comparing 2021 West Bengal Assembly and 2024 Lok Sabha elections.">
+<meta name="author"      content="Sabar Institute">
 <style>
-/* ── SPLASH ────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@700&display=swap');
+
+/* ── SPLASH ──────────────────────────────────────────────────────────────── */
 #splash{
   position:fixed;inset:0;z-index:9999;
-  background:#0d0d0d;
+  background-color:#0d0d0d;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   overflow:hidden;
 }
@@ -29,7 +47,7 @@
 #splash.out{animation:splashOut .6s ease forwards}
 @keyframes splashOut{to{opacity:0;visibility:hidden}}
 .sp-logo{
-  width:clamp(280px,48vw,460px);height:auto;
+  width:clamp(320px,54vw,520px);height:auto;
   opacity:0;transform:translateY(-12px);
   animation:logoIn .75s cubic-bezier(.22,1,.36,1) .1s forwards;
 }
@@ -40,211 +58,122 @@
   margin:22px 0 20px;border-radius:2px;
   animation:lineGrow .55s ease .65s forwards;
 }
-@keyframes lineGrow{to{width:clamp(180px,32vw,300px)}}
+@keyframes lineGrow{to{width:clamp(200px,36vw,340px)}}
 .sp-tag{
-  font-family:'Barlow',sans-serif;font-weight:700;
-  font-size:clamp(26px,4.5vw,40px);
-  letter-spacing:-1px;line-height:1.18;color:#e8e8e8;
+  font-family:'Barlow','Arial Black',sans-serif;
+  font-weight:700;font-size:clamp(30px,5vw,46px);
+  letter-spacing:-1.5px;line-height:1.18;color:#e8e8e8;
   overflow:hidden;white-space:nowrap;width:0;opacity:0;
-  animation:tagShow .01s .9s forwards,tagType .7s steps(19,end) .9s forwards;
+  animation:tagShow .01s .9s forwards,tagType .75s steps(16,end) .9s forwards;
 }
 .sp-tag b{color:#B9BF1F;font-weight:inherit}
 @keyframes tagShow{to{opacity:1}}
-@keyframes tagType{to{width:19ch}}
+@keyframes tagType{to{width:18ch}}
 .sp-sub{
-  font-family:'Barlow',sans-serif;font-size:11px;
-  letter-spacing:.2em;text-transform:uppercase;color:#888;
-  opacity:0;margin-top:14px;
-  animation:subIn .5s ease 1.55s forwards;
+  font-family:'Barlow',Arial,sans-serif;font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;color:#aaa;
+  opacity:0;margin-top:16px;
+  animation:subIn .5s ease 1.6s forwards;
 }
 @keyframes subIn{to{opacity:1}}
 .sp-bar{
   position:absolute;bottom:0;left:0;height:2px;
   background:linear-gradient(90deg,#B9BF1F,#e8f020,#B9BF1F);
   background-size:200% 100%;width:0%;
-  animation:barGrow 2s cubic-bezier(.4,0,.2,1) .2s forwards,
+  animation:barGrow 2.1s cubic-bezier(.4,0,.2,1) .2s forwards,
             barShimmer 1.4s linear .5s infinite;
 }
 @keyframes barGrow{to{width:100%}}
 @keyframes barShimmer{to{background-position:200% 0}}
 
-/* ── BASE ──────────────────────────────────────────────────────────────── */
+/* ── REPORT ──────────────────────────────────────────────────────────────── */
 :root{
+  --tmc:#1a9e5c;--tmc-l:#d4f5e5;--tmc-d:#0a5c34;
+  --cpm:#cc2929;--cpm-l:#fde8e8;--cpm-d:#7a1010;
+  --bjp:#e07b1a;--bjp-l:#fef0dc;
   --bg:#0d0d0d;--s1:#161616;--s2:#1e1e1e;--bdr:#2a2a2a;
-  --txt:#e8e8e8;--muted:#888;--accent:#f0c040;--accent2:#B9BF1F;
-  --inc:#1a9e5c;--del:#cc2929;
-  --font-sans:'Barlow',Arial,sans-serif;
-  --font-serif:'EB Garamond',Georgia,serif;
+  --txt:#e8e8e8;--muted:#888;--accent:#f0c040;
   --font-mono:'Courier New',monospace;
+  --font-sans:'Helvetica Neue',Arial,sans-serif;
+  --font-serif:Georgia,'Times New Roman',serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--txt);font-size:13px;line-height:1.6;min-height:100vh}
-
-/* ── HEADER ────────────────────────────────────────────────────────────── */
-header{
-  background:var(--s1);border-bottom:1px solid var(--bdr);
-  padding:0 40px;
-  display:flex;align-items:center;justify-content:space-between;
-  height:64px;position:sticky;top:0;z-index:100;
-}
-.logo-wrap{display:flex;align-items:center;gap:14px}
-.logo-wrap svg{height:32px;width:auto}
-.logo-divider{width:1px;height:24px;background:var(--bdr)}
-.site-title{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.header-tag{
-  font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  background:rgba(240,192,64,.12);border:1px solid rgba(240,192,64,.25);
-  color:var(--accent);padding:4px 12px;border-radius:20px;
-}
-
-/* ── HERO ──────────────────────────────────────────────────────────────── */
-.hero{
-  padding:64px 40px 48px;
-  background:linear-gradient(135deg,#0d0d0d 0%,#141410 100%);
-  border-bottom:1px solid var(--bdr);
-  position:relative;overflow:hidden;
-}
-.hero::after{
-  content:'';position:absolute;right:-100px;top:-100px;
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(185,191,31,.04) 0%,transparent 60%);
-  pointer-events:none;
-}
-.hero-badge{
-  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--accent);
-  border-bottom:1px solid rgba(240,192,64,.3);
-  padding-bottom:4px;margin-bottom:16px;
-}
-.hero h1{
-  font-family:var(--font-serif);
-  font-size:clamp(28px,4vw,52px);font-weight:600;
-  line-height:1.08;color:#fff;margin-bottom:12px;
-}
-.hero h1 em{color:var(--accent2);font-style:normal}
-.hero p{color:var(--muted);font-size:13px;max-width:560px;line-height:1.8}
-.hero-stats{
-  display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;
-}
-.h-stat{border-left:2px solid var(--bdr);padding-left:16px}
-.h-stat-val{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--accent)}
-.h-stat-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
-
-/* ── MAIN ──────────────────────────────────────────────────────────────── */
-main{max-width:1280px;margin:0 auto;padding:40px}
-
-.section-header{
-  display:flex;align-items:baseline;justify-content:space-between;
-  margin-bottom:24px;flex-wrap:wrap;gap:12px;
-}
-.section-title{
-  font-family:var(--font-serif);font-size:20px;font-weight:600;color:#fff;
-}
-.section-sub{font-size:11px;color:var(--muted)}
-
-/* ── ASSEMBLY CARDS ─────────────────────────────────────────────────────── */
-.cards-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:16px;
-}
-.ac-card{
-  background:var(--s1);border:1px solid var(--bdr);border-radius:10px;
-  padding:24px;cursor:pointer;transition:all .2s;
-  text-decoration:none;color:inherit;display:block;
-  position:relative;overflow:hidden;
-}
-.ac-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--accent2),transparent);
-  opacity:0;transition:opacity .2s;
-}
-.ac-card:hover{border-color:rgba(185,191,31,.3);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.ac-card:hover::before{opacity:1}
-
-.ac-no{
-  font-family:var(--font-mono);font-size:10px;font-weight:700;
-  letter-spacing:.15em;color:var(--accent);
-  background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.15);
-  display:inline-block;padding:2px 8px;border-radius:4px;margin-bottom:10px;
-}
-.ac-name{
-  font-family:var(--font-serif);font-size:22px;font-weight:600;
-  color:#fff;line-height:1.1;margin-bottom:4px;
-}
-.ac-district{font-size:11px;color:var(--muted);margin-bottom:16px}
-
-.ac-meta{
-  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;
-}
-.ac-pill{
-  font-size:10px;font-weight:600;letter-spacing:.05em;
-  padding:3px 9px;border-radius:12px;
-}
-.pill-inc{background:rgba(26,158,92,.12);border:1px solid rgba(26,158,92,.25);color:#4ade80}
-.pill-del{background:rgba(204,41,41,.12);border:1px solid rgba(204,41,41,.25);color:#ff6b6b}
-.pill-ph{background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.2);color:var(--accent)}
-
-.ac-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid var(--bdr);padding-top:14px;margin-top:4px;
-}
-.ac-footer-stat{text-align:center}
-.ac-footer-val{font-family:var(--font-mono);font-size:14px;font-weight:700}
-.ac-footer-lbl{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:1px}
-.ac-arrow{
-  width:28px;height:28px;border-radius:50%;
-  background:rgba(255,255,255,.04);border:1px solid var(--bdr);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;color:var(--muted);transition:all .2s;
-}
-.ac-card:hover .ac-arrow{background:var(--accent2);border-color:var(--accent2);color:#000}
-
-/* ── EMPTY / LOADING ────────────────────────────────────────────────────── */
-.empty{
-  grid-column:1/-1;
-  padding:48px;text-align:center;
-  background:var(--s1);border:1px dashed var(--bdr);border-radius:10px;
-  color:var(--muted);font-size:13px;
-}
-.loading-dots{display:inline-flex;gap:4px;align-items:center}
-.loading-dots span{
-  width:6px;height:6px;border-radius:50%;background:var(--accent);
-  animation:dot-bounce .9s ease infinite;
-}
-.loading-dots span:nth-child(2){animation-delay:.15s}
-.loading-dots span:nth-child(3){animation-delay:.3s}
-@keyframes dot-bounce{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
-
-/* ── FOOTER ────────────────────────────────────────────────────────────── */
-footer{
-  border-top:1px solid var(--bdr);padding:24px 40px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;
-}
-footer p{font-size:11px;color:var(--muted)}
-footer a{color:var(--accent);text-decoration:none}
-
-@media(max-width:640px){
-  header,footer{padding-left:20px;padding-right:20px}
-  .hero{padding:40px 20px 32px}
-  main{padding:24px 20px}
-}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--txt);font-size:13px;line-height:1.5}
+nav{background:var(--s1);border-bottom:1px solid var(--bdr);padding:0 32px;display:flex;gap:0;position:sticky;top:0;z-index:100;overflow-x:auto}
+nav a{padding:12px 16px;color:var(--muted);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.5px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+nav a:hover{color:var(--txt);border-bottom-color:var(--accent)}
+header{padding:40px 32px 28px;background:linear-gradient(135deg,#0d0d0d,#161616);border-bottom:1px solid var(--bdr)}
+.badge{display:inline-block;background:rgba(240,192,64,.15);border:1px solid rgba(240,192,64,.3);color:var(--accent);padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:2px;margin-bottom:12px}
+h1{font-family:var(--font-serif);font-size:clamp(24px,4vw,44px);font-weight:700;line-height:1.1;margin-bottom:8px;background:linear-gradient(135deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{color:var(--muted);font-size:12px}
+.pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.pill{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.p-tmc{background:var(--tmc);color:#fff}.p-cpm{background:var(--cpm);color:#fff}.p-bjp{background:var(--bjp);color:#fff}
+main{max-width:1320px;margin:0 auto;padding:32px 32px 80px}
+section{margin-bottom:48px;scroll-margin-top:52px}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+h2{font-family:var(--font-serif);font-size:22px;font-weight:700;margin-bottom:20px;color:#fff}
+h3{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.hr{border:none;border-top:1px solid var(--bdr);margin:32px 0}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.card{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:18px 20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.card.tmc::before{background:var(--tmc)}.card.cpm::before{background:var(--cpm)}.card.bjp::before{background:var(--bjp)}.card.neu::before{background:var(--accent)}
+.card-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.card-val{font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1;margin-bottom:4px}
+.card-sub{font-size:11px;color:var(--muted)}
+.delta{display:inline-block;font-family:var(--font-mono);font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;margin-top:6px}
+.dn{background:rgba(204,41,41,.15);color:#ff6b6b}.up{background:rgba(26,158,92,.15);color:#4ade80}.fl{background:rgba(200,200,200,.1);color:var(--muted)}
+.bars2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.bar-card{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:18px 20px}
+.bar-row{margin-bottom:10px}.bar-row:last-child{margin-bottom:0}
+.bar-meta{display:flex;justify-content:space-between;margin-bottom:5px}
+.bar-name{font-size:11px;font-weight:600}.bar-val{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+.bar-track{background:var(--s2);border-radius:3px;height:7px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.dist-wrap{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:18px 20px;margin-bottom:24px}
+.dist-bars{display:flex;gap:4px;align-items:flex-end;height:72px;margin-bottom:6px}
+.dist-bar{flex:1;border-radius:3px 3px 0 0;display:flex;align-items:flex-end;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:700;color:#fff;padding-bottom:3px;min-width:28px}
+.dist-lbls{display:flex;gap:4px}
+.dist-lbl{flex:1;text-align:center;font-size:9px;color:var(--muted);min-width:28px}
+.ins{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--accent)}
+.ins.red{border-left-color:var(--cpm)}.ins.grn{border-left-color:var(--tmc)}.ins.org{border-left-color:var(--bjp)}.ins.blu{border-left-color:#60a5fa}
+.ins p{font-size:12px;color:var(--muted);line-height:1.7}
+.ins p strong{color:var(--txt)}
+.tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--bdr);margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead{background:var(--s2)}
+th{padding:8px 10px;text-align:right;font-family:var(--font-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--bdr);white-space:nowrap}
+th:first-child,th:nth-child(2){text-align:left}
+td{padding:7px 10px;text-align:right;border-bottom:1px solid rgba(255,255,255,.03);font-family:var(--font-mono)}
+td:first-child,td:nth-child(2){text-align:left}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.tmc-c{color:#4ade80}.cpm-c{color:#ff6b6b}.bjp-c{color:#fbbf24}
+.pos{color:#4ade80}.neg{color:#ff6b6b}.neu{color:var(--muted)}
+.w-tmc{color:#4ade80;font-weight:700}.w-cpm{color:#ff6b6b;font-weight:700}.w-bjp{color:#fbbf24;font-weight:700}
+.strat{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.strat-card{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:18px 20px}
+.strat-card h4{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.ic{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.ic-r{background:rgba(204,41,41,.2);color:var(--cpm)}.ic-g{background:rgba(26,158,92,.2);color:var(--tmc)}
+.ic-a{background:rgba(240,192,64,.2);color:var(--accent)}.ic-b{background:rgba(96,165,250,.2);color:#60a5fa}
+.strat-card p{font-size:11px;color:var(--muted);line-height:1.7}
+@media(max-width:700px){main,header{padding-left:16px;padding-right:16px}nav{padding:0 16px}.bars2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- SPLASH -->
 <div id="splash" aria-hidden="true">
-  <div class="sp-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="270 455 540 187"><defs><style>.cls-1{fill:#eff1ba}.cls-2{fill:#cbd222}.cls-4{fill:#e8e8e8}</style></defs><g><g><rect class="cls-2" x="472.38" y="550.13" width="12.44" height="12.44" transform="translate(-253.22 501.38) rotate(-45)"/><path class="cls-2" d="M489.39,477.01c-3.43,2.05-6.2,4.76-8.19,8.13-2.05,3.43-3.1,7.19-3.1,11.4.22,6.25,2.38,11.45,6.58,15.66,2.05,2.05,4.43,3.65,7.08,4.81,2.71,1.16,5.64,1.72,8.74,1.72h6.47c1.11,0,2.1.39,2.93,1.22.77.83,1.16,1.77,1.16,2.93s-.39,2.1-1.16,2.93c-.83.77-1.83,1.22-2.93,1.22h-32.48c-4.37,0-8.41,1.16-12.06,3.43-3.65,2.32-6.47,5.48-8.41,9.46l-2.43,5.03h55.11c4.09,0,7.8-1,11.23-3.04,3.38-1.99,6.09-4.65,8.08-8.02,1.99-3.32,2.99-7.08,3.04-11.18-.22-6.2-2.38-11.34-6.47-15.44-2.05-2.05-4.37-3.6-7.03-4.76-2.71-1.16-5.53-1.72-8.58-1.72h-6.36c-1.22,0-2.32-.44-3.15-1.27-.89-.83-1.38-1.88-1.44-3.1.05-1.33.44-2.38,1.33-3.21.88-.89,1.88-1.33,3.15-1.33h28.55v-17.93h-28.33c-4.1,0-7.91,1-11.34,3.04Z"/><rect class="cls-2" x="489.98" y="550.13" width="12.44" height="12.44" transform="translate(-248.06 513.77) rotate(-45)"/><path class="cls-2" d="M574.42,491.95c-.61,0-1.66,0-3.1-.06h-2.93c-.94,0-1.6,0-1.99.06h-5.98c-4.87,0-9.35,1.16-13.33,3.54-4.04,2.38-7.19,5.59-9.63,9.63-2.38,3.98-3.54,8.46-3.54,13.33s1.16,9.29,3.54,13.33c2.43,3.98,5.59,7.19,9.63,9.57,3.98,2.38,8.47,3.6,13.33,3.6h38.51v-60.31c-3.1,1.83-6.69,3.49-10.84,4.92-4.09,1.49-8.69,2.27-13.67,2.38ZM580.79,527.03h-20.58c-2.38,0-4.37-.83-6.09-2.49-1.66-1.72-2.49-3.71-2.49-6.09s.83-4.43,2.49-6.09c1.72-1.66,3.71-2.54,6.09-2.54h20.58v17.21Z"/><rect class="cls-2" x="636.47" y="550.13" width="12.44" height="12.44" transform="translate(-205.16 617.4) rotate(-45)"/><path class="cls-2" d="M663.6,491.51c-4.7-2.82-9.96-4.21-15.66-4.21h-23.07v-25.95l-6.31,2.99c-3.6,1.77-6.42,4.32-8.47,7.58-2.1,3.32-3.15,6.92-3.15,10.9v62.13h72.15v-26.5c0-5.75-1.44-10.95-4.21-15.66-2.82-4.7-6.58-8.46-11.29-11.29ZM661.17,527.03h-36.63c.22-1.22.33-2.43.33-3.65v-18.15h20.03c.77,0,1.77.11,3.04.22,1.33.17,2.71.55,4.21,1.16s2.93,1.6,4.37,2.93c.83.83,1.55,1.66,2.1,2.49,1.71,2.6,2.54,5.42,2.54,8.41v6.58Z"/><path class="cls-2" d="M725.34,491.95c-.61,0-1.66,0-3.1-.06h-2.93c-.94,0-1.6,0-1.99.06h-5.98c-4.87,0-9.35,1.16-13.33,3.54-4.04,2.38-7.19,5.59-9.63,9.63-2.38,3.98-3.54,8.46-3.54,13.33s1.16,9.29,3.54,13.33c2.43,3.98,5.59,7.19,9.63,9.57,3.98,2.38,8.46,3.6,13.33,3.6h38.51v-60.31c-3.1,1.83-6.7,3.49-10.84,4.92-4.09,1.49-8.69,2.27-13.67,2.38ZM731.7,527.03h-20.58c-2.38,0-4.37-.83-6.09-2.49-1.66-1.72-2.49-3.71-2.49-6.09s.83-4.43,2.49-6.09c1.71-1.66,3.71-2.54,6.09-2.54h20.58v17.21Z"/><polygon class="cls-2" points="793.39 472.86 782.65 462.07 771.87 472.86 782.65 483.59 793.39 472.86"/><path class="cls-2" d="M784.92,486.75c-4.98,0-9.52,1.22-13.61,3.65-4.09,2.43-7.36,5.7-9.79,9.79-2.43,4.09-3.65,8.63-3.65,13.61v31.15h17.98v-27.72c0-3.49,1.22-6.42,3.65-8.85,2.43-2.43,5.42-3.71,8.85-3.71h14.5v-17.93h-17.93Z"/></g><g><path class="cls-2" d="M443.32,544.95h-91.69c-20.07,0-36.34-16.27-36.34-36.34h0c0-20.07,16.27-36.34,36.34-36.34h91.69v72.69Z"/><path class="cls-2" d="M277.15,544.95h91.69c20.07,0,36.34,16.27,36.34,36.34h0c0,20.07-16.27,36.34-36.34,36.34h-91.69s0-72.69,0-72.69Z"/></g><g><path class="cls-4" d="M377.64,509.71h-39.19c-8.71,23.26,19.59,36.48,19.59,36.48,0,0,28.3-13.22,19.59-36.48Z"/><path class="cls-1" d="M377.64,582.66h-39.19c-8.71-23.26,19.59-36.48,19.59-36.48,0,0,28.3,13.22,19.59,36.48Z"/><path class="cls-1" d="M369.83,524.25h-23.57c-5.24,13.99,11.78,21.94,11.78,21.94,0,0,17.02-7.95,11.78-21.94Z"/><path class="cls-4" d="M369.83,568.13h-23.57c-5.24-13.99,11.78-21.94,11.78-21.94,0,0,17.02,7.95,11.78,21.94Z"/></g><g><path class="cls-2" d="M438.32,565.03h-22.05c-.2,0-.3.1-.3.3v2.01c0,.2.1.3.3.3.87,0,1.66.07,2.37.22.71.15,1.31.4,1.79.75.48.35.86.81,1.12,1.38.26.57.39,1.28.39,2.13v37.57c0,1.19-.14,2.14-.41,2.84-.27.7-.66,1.23-1.16,1.6-.5.37-1.1.62-1.81.73-.71.11-1.5.17-2.37.17-.12,0-.21.04-.24.11-.04.07-.06.14-.06.19v2.01c0,.05.02.11.06.19.04.07.12.11.24.11h22.05c.15,0,.24-.03.26-.09.02-.06.04-.13.04-.21v-2.01c0-.2-.1-.3-.3-.3-.87,0-1.66-.07-2.37-.22-.71-.15-1.31-.4-1.79-.75-.48-.35-.86-.81-1.12-1.38-.26-.57-.39-1.28-.39-2.13v-37.57c0-1.19.14-2.14.41-2.84.27-.7.66-1.23,1.16-1.6.5-.37,1.1-.62,1.81-.73.71-.11,1.5-.17,2.37-.17.12,0,.21-.04.24-.11.04-.07.06-.14.06-.19v-2.01s-.02-.11-.06-.19c-.04-.07-.12-.11-.24-.11Z"/><path class="cls-2" d="M501.34,615.4c-.22-.1-.54-.18-.95-.24-.41-.06-.86-.14-1.36-.24-.5-.1-1.01-.23-1.53-.39-.52-.16-1-.4-1.44-.73-.43-.32-.79-.73-1.06-1.23-.27-.5-.41-1.12-.41-1.87,0-1.59.02-2.95.06-4.07s.07-2.12.11-3c.04-.88.07-1.7.11-2.44.04-.75.06-1.55.06-2.42,0-.92-.04-1.95-.11-3.08-.07-1.13-.21-2.28-.41-3.43-.2-1.16-.49-2.29-.88-3.4-.39-1.11-.88-2.09-1.49-2.95s-1.36-1.55-2.26-2.07-1.95-.78-3.17-.78c-1.12,0-2.06.01-2.83.04-.77.03-1.48.09-2.13.21-.65.11-1.29.27-1.92.48-.63.21-1.36.51-2.16.9-.81.39-1.77.86-2.87,1.42-1.11.56-2.46,1.25-4.05,2.07-.12.07-.22.12-.3.13-.07.01-.17.02-.3.02s-.22-.12-.3-.37v-5.82c0-.6-.21-.9-.63-.9-.05,0-.13.02-.24.07-.11.05-.22.1-.32.15l-12.35,5.82c-.22.12-.37.25-.45.37-.07.12-.11.25-.11.37,0,.27.04.45.13.54.09.09.2.16.35.21.52.15,1.07.28,1.64.39s1.11.26,1.6.43c.5.17.91.43,1.23.76.32.34.49.8.49,1.4v18.95c0,1.12-.22,1.97-.67,2.56-.45.58-.97,1.01-1.57,1.27-.6.26-1.19.44-1.79.52-.6.09-1.06.21-1.38.35-.1.05-.19.21-.26.48-.07.27-.11.47-.11.6,0,.15.02.37.08.65.05.29.15.45.3.5h19.48c.15-.05.25-.22.3-.5.05-.29.07-.5.07-.65,0-.12-.04-.32-.11-.6-.07-.27-.16-.43-.26-.48-.32-.15-.78-.27-1.38-.35-.6-.09-1.19-.26-1.79-.52-.6-.26-1.12-.68-1.57-1.27-.45-.58-.67-1.44-.67-2.56v-18.28c.02-.25.14-.45.36-.62.21-.16.42-.3.62-.43,1.59-.77,2.86-1.38,3.8-1.83s1.71-.78,2.29-1.01,1.08-.37,1.49-.43c.41-.06.88-.09,1.4-.09,1.49,0,2.66.3,3.51.9.84.6,1.49,1.37,1.92,2.31.43.95.71,2.01.82,3.21.11,1.19.17,2.4.17,3.62,0,1.57.01,2.98.04,4.25.02,1.27.04,2.46.04,3.58,0,.52,0,.98-.02,1.38-.01.4-.03.76-.06,1.1-.03.34-.06.67-.09.99-.04.32-.08.67-.13,1.05-.15,1.19-.45,2.1-.91,2.7-.46.61-.97,1.06-1.53,1.36-.56.3-1.11.49-1.64.58-.54.09-.96.21-1.29.35-.1.05-.19.21-.26.48-.07.27-.11.47-.11.6,0,.15.02.37.07.65.05.29.15.45.3.5h20.82c.15-.05.25-.22.3-.5.05-.29.07-.5.07-.65,0-.12-.04-.32-.11-.6-.07-.27-.16-.43-.26-.48Z"/><path class="cls-2" d="M535.23,600.48c-1.17-1.09-2.44-2.06-3.82-2.91-1.38-.85-2.66-1.63-3.82-2.37-1.17-.73-2.15-1.46-2.93-2.18-.78-.72-1.18-1.5-1.18-2.35,0-.97.12-1.77.35-2.39.24-.62.55-1.11.95-1.47.4-.36.84-.6,1.34-.73.5-.12.99-.19,1.49-.19.84,0,1.59.19,2.24.58.65.39,1.21.9,1.7,1.53.48.63.91,1.34,1.29,2.13.37.78.71,1.56,1.01,2.33.07.22.24.39.5.48.26.1.53.15.8.15.3,0,.6-.09.91-.28.31-.19.47-.49.47-.91,0-1.54,0-2.79-.02-3.75-.01-.96-.04-1.72-.07-2.29-.04-.57-.11-.99-.22-1.25-.11-.26-.26-.45-.43-.58-.12-.07-.42-.2-.88-.37-.46-.17-1.02-.35-1.68-.52-.66-.17-1.38-.33-2.16-.47-.78-.14-1.56-.21-2.33-.21-1.47,0-2.94.26-4.42.78-1.48.52-2.82,1.22-4.01,2.09-1.19.87-2.16,1.87-2.91,3-.75,1.13-1.12,2.29-1.12,3.49,0,2.06.37,3.8,1.12,5.2.75,1.41,1.67,2.62,2.78,3.64,1.11,1.02,2.31,1.92,3.62,2.69,1.31.77,2.51,1.53,3.62,2.28,1.11.75,2.03,1.55,2.78,2.41.75.86,1.12,1.91,1.12,3.15,0,.62-.04,1.22-.13,1.79-.09.57-.27,1.08-.54,1.53-.27.45-.66.81-1.16,1.08-.5.27-1.14.41-1.94.41-1.04,0-1.94-.14-2.69-.43-.75-.29-1.39-.69-1.94-1.21-.55-.52-1.03-1.16-1.46-1.9-.42-.75-.85-1.58-1.27-2.5-.07-.15-.19-.32-.34-.52s-.32-.39-.5-.58c-.19-.19-.39-.34-.6-.47s-.4-.19-.58-.19c-.32,0-.63.06-.91.17-.29.11-.43.37-.43.76,0,.72.04,1.62.11,2.71.07,1.08.17,2.13.28,3.13s.22,1.87.32,2.59c.1.72.17,1.08.22,1.08h1.34c.2,0,.37-.06.52-.19.15-.12.3-.27.47-.43.16-.16.33-.31.5-.43.17-.12.37-.19.6-.19.05,0,.26.06.63.19.37.12.85.27,1.42.43.57.16,1.21.3,1.9.43.7.12,1.39.19,2.09.19,1.37,0,2.77-.22,4.2-.65s2.73-1.05,3.9-1.85c1.17-.8,2.13-1.77,2.87-2.93.75-1.16,1.12-2.46,1.12-3.9,0-1.94-.39-3.62-1.18-5.06-.78-1.43-1.76-2.69-2.93-3.79Z"/><path class="cls-2" d="M579.37,586.13c-.05-.46-.1-.88-.15-1.27-.05-.39-.1-.64-.15-.77-.08-.22-.19-.4-.34-.54-.15-.14-.42-.21-.82-.21h-9.51c-.27-.02-.44-.1-.5-.22-.06-.12-.09-.29-.09-.49.12-.47.26-.96.41-1.46.15-.5.29-.97.41-1.42.12-.45.23-.85.32-1.21.09-.36.13-.63.13-.8,0-.15-.1-.27-.3-.37-.2-.1-.37-.15-.52-.15-.67,0-1.33.21-1.98.62s-1.25.88-1.81,1.42-1.06,1.08-1.49,1.62c-.44.55-.78.96-1.03,1.23-.42.4-.91.83-1.46,1.31-.55.47-1.11.95-1.68,1.42-.57.47-1.15.93-1.73,1.36s-1.13.81-1.62,1.14c-.07.05-.14.15-.19.3-.05.15-.08.29-.08.41.02.2.14.39.34.56.2.17.47.26.82.26h2.8v20.86c0,1.14.24,2.25.73,3.32.48,1.07,1.15,2.02,2,2.85.85.83,1.85,1.5,3.02,2s2.43.75,3.77.75c.97,0,1.9-.17,2.78-.5s1.7-.76,2.44-1.27c.75-.51,1.42-1.06,2.03-1.66.61-.6,1.13-1.16,1.55-1.68.42-.52.76-.97,1.01-1.34.25-.37.39-.58.41-.63.05-.1.12-.24.21-.43.09-.19.13-.44.13-.77,0-.15-.03-.36-.09-.63-.06-.27-.27-.41-.62-.41-.5,0-.95.17-1.34.5-.4.34-.86.7-1.38,1.1-.52.4-1.14.76-1.87,1.1-.72.34-1.66.5-2.8.5-.4,0-.8-.1-1.19-.3s-.75-.5-1.06-.9c-.31-.4-.57-.9-.76-1.49-.2-.6-.3-1.29-.3-2.09v-18.54c0-.12,0-.21.02-.26.01-.05.08-.07.2-.07h11.23c.2,0,.3-.07.3-.22,0-.3-.02-.68-.06-1.14-.04-.46-.08-.92-.13-1.38Z"/><path class="cls-2" d="M603.52,574.06c1.59,0,2.86-.47,3.81-1.4.94-.93,1.42-2.2,1.42-3.79s-.47-2.86-1.42-3.81c-.95-.94-2.21-1.42-3.81-1.42s-2.86.47-3.81,1.42c-.94.95-1.42,2.21-1.42,3.81s.47,2.85,1.42,3.79,2.21,1.4,3.81,1.4Z"/><path class="cls-2" d="M613.96,615.4c-.32-.15-.78-.27-1.38-.35-.6-.09-1.19-.26-1.79-.52-.6-.26-1.12-.67-1.57-1.23s-.67-1.39-.67-2.48v-27.53c0-.6-.21-.9-.63-.9-.05,0-.13.03-.24.07-.11.05-.22.1-.32.15l-12.35,5.82c-.22.12-.37.25-.45.37-.07.12-.11.25-.11.37,0,.27.04.45.13.54.09.09.2.16.35.21.52.15,1.07.28,1.64.39s1.11.26,1.6.43c.5.17.91.43,1.23.77.32.34.48.8.48,1.4v17.91c0,1.1-.22,1.92-.67,2.48s-.97.97-1.57,1.23c-.6.26-1.19.44-1.79.52-.6.09-1.06.21-1.38.35-.1.05-.19.21-.26.48-.07.27-.11.47-.11.6,0,.15.02.37.08.65.05.29.15.45.3.5h19.48c.15-.05.25-.22.3-.5.05-.29.07-.5.07-.65,0-.12-.04-.32-.11-.6-.07-.27-.16-.43-.26-.48Z"/><path class="cls-2" d="M653.44,586.13c-.05-.46-.1-.88-.15-1.27-.05-.39-.1-.64-.15-.77-.08-.22-.19-.4-.34-.54-.15-.14-.42-.21-.82-.21h-9.51c-.27-.02-.44-.1-.5-.22-.06-.12-.09-.29-.09-.49.12-.47.26-.96.41-1.46.15-.5.29-.97.41-1.42.12-.45.23-.85.32-1.21.09-.36.13-.63.13-.8,0-.15-.1-.27-.3-.37-.2-.1-.37-.15-.52-.15-.67,0-1.33.21-1.98.62s-1.25.88-1.81,1.42-1.06,1.08-1.49,1.62c-.44.55-.78.96-1.03,1.23-.42.4-.91.83-1.46,1.31-.55.47-1.11.95-1.68,1.42-.57.47-1.15.93-1.73,1.36s-1.13.81-1.62,1.14c-.07.05-.14.15-.19.3-.05.15-.08.29-.08.41.02.2.14.39.34.56.2.17.47.26.82.26h2.8v20.86c0,1.14.24,2.25.73,3.32.48,1.07,1.15,2.02,2,2.85.85.83,1.85,1.5,3.02,2s2.43.75,3.77.75c.97,0,1.9-.17,2.78-.5s1.7-.76,2.44-1.27c.75-.51,1.42-1.06,2.03-1.66.61-.6,1.13-1.16,1.55-1.68.42-.52.76-.97,1.01-1.34.25-.37.39-.58.41-.63.05-.1.12-.24.21-.43.09-.19.13-.44.13-.77,0-.15-.03-.36-.09-.63-.06-.27-.27-.41-.62-.41-.5,0-.95.17-1.34.5-.4.34-.86.7-1.38,1.1-.52.4-1.14.76-1.87,1.1-.72.34-1.66.5-2.8.5-.4,0-.8-.1-1.19-.3s-.75-.5-1.06-.9c-.31-.4-.57-.9-.76-1.49-.2-.6-.3-1.29-.3-2.09v-18.54c0-.12,0-.21.02-.26.01-.05.08-.07.2-.07h11.23c.2,0,.3-.07.3-.22,0-.3-.02-.68-.06-1.14-.04-.46-.08-.92-.13-1.38Z"/><path class="cls-2" d="M708.26,611.45l-2.16.15c-1.12,0-1.93-.24-2.42-.71-.5-.47-.81-1.26-.93-2.35v-25.74c0-.22-.12-.34-.37-.34-.15,0-.3.01-.47.04-.16.03-.32.06-.47.11l-11.38,3.25c-.27.07-.44.19-.5.34-.06.15-.09.32-.09.52,0,.22.06.38.17.47.11.09.26.15.43.19.17.04.37.06.58.07.21.01.4.04.58.09.67.15,1.3.48,1.88.99.58.51.91,1.13.99,1.85v19.96c-.32.45-.75.88-1.27,1.29-.52.41-1.08.77-1.68,1.08-.6.31-1.22.57-1.87.77-.65.2-1.27.3-1.87.3-.85,0-1.67-.12-2.46-.37-.8-.25-1.5-.61-2.13-1.08-.62-.47-1.13-1.05-1.51-1.73s-.58-1.45-.58-2.29v-25.18c0-.42-.12-.63-.37-.63-.15,0-.3.01-.47.04-.16.03-.32.06-.47.11l-11.38,3.28c-.27.07-.44.19-.5.34-.06.15-.09.32-.09.52,0,.22.06.38.17.47s.26.15.43.19c.17.04.37.06.58.07.21.01.4.04.58.09.67.15,1.3.48,1.88.99.58.51.91,1.13.99,1.85v22.54c0,1.02.36,1.89,1.08,2.61.72.72,1.62,1.31,2.7,1.77,1.08.46,2.25.8,3.51,1.01,1.25.21,2.41.32,3.45.32.62,0,1.19-.05,1.72-.15.52-.1,1.01-.24,1.47-.41.46-.17.93-.35,1.4-.54.47-.19.98-.38,1.53-.58l5.97-2.91s.02-.07.08-.07h.15c.17,0,.3.05.37.15v3.58c0,.2.02.4.06.62.04.21.14.32.32.32.02,0,.14-.03.33-.09.2-.06.32-.11.37-.13l11.34-4.66c.25-.12.4-.32.47-.6.06-.27.09-.43.09-.48,0-.15-.01-.39-.04-.73s-.09-.5-.19-.5Z"/><path class="cls-2" d="M747.96,586.13c-.05-.46-.1-.88-.15-1.27-.05-.39-.1-.64-.15-.77-.07-.22-.19-.4-.34-.54-.15-.14-.42-.21-.82-.21h-9.51c-.27-.02-.44-.1-.5-.22-.06-.12-.09-.29-.09-.49.12-.47.26-.96.41-1.46.15-.5.29-.97.41-1.42.12-.45.23-.85.32-1.21.09-.36.13-.63.13-.8,0-.15-.1-.27-.3-.37-.2-.1-.37-.15-.52-.15-.67,0-1.33.21-1.98.62-.65.41-1.25.88-1.81,1.42s-1.06,1.08-1.49,1.62c-.44.55-.78.96-1.03,1.23-.42.4-.91.83-1.46,1.31-.55.47-1.11.95-1.68,1.42s-1.15.93-1.73,1.36-1.13.81-1.62,1.14c-.07.05-.14.15-.19.3-.05.15-.07.29-.07.41.02.2.14.39.34.56.2.17.47.26.82.26h2.8v20.86c0,1.14.24,2.25.73,3.32.49,1.07,1.15,2.02,2,2.85.84.83,1.85,1.5,3.02,2,1.17.5,2.42.75,3.77.75.97,0,1.9-.17,2.78-.5.88-.34,1.7-.76,2.44-1.27.75-.51,1.42-1.06,2.03-1.66.61-.6,1.12-1.16,1.55-1.68.42-.52.76-.97,1.01-1.34.25-.37.39-.58.41-.63.05-.1.12-.24.2-.43.09-.19.13-.44.13-.77,0-.15-.03-.36-.09-.63-.06-.27-.27-.41-.62-.41-.5,0-.94.17-1.34.5s-.86.7-1.38,1.1c-.52.4-1.14.76-1.87,1.1s-1.65.5-2.8.5c-.4,0-.8-.1-1.19-.3-.4-.2-.75-.5-1.06-.9-.31-.4-.57-.9-.77-1.49-.2-.6-.3-1.29-.3-2.09v-18.54c0-.12,0-.21.02-.26.01-.05.08-.07.21-.07h11.23c.2,0,.3-.07.3-.22,0-.3-.02-.68-.06-1.14-.04-.46-.08-.92-.13-1.38Z"/><path class="cls-2" d="M771.7,597.23h22.01c.32,0,.55-.21.69-.62.14-.41.21-.79.21-1.14,0-1.07-.22-2.18-.67-3.34-.45-1.16-1-2.24-1.64-3.26-.65-1.02-1.34-1.92-2.07-2.69-.73-.77-1.39-1.31-1.96-1.6-.5-.3-.99-.58-1.47-.84-.48-.26-1.01-.49-1.57-.67-.56-.19-1.18-.34-1.85-.45s-1.43-.17-2.28-.17c-2.84,0-5.37.5-7.59,1.49-2.23,1-4.11,2.39-5.65,4.18s-2.72,3.91-3.54,6.36c-.82,2.45-1.23,5.13-1.23,8.04,0,1.99.35,3.95,1.06,5.88.71,1.93,1.75,3.65,3.11,5.17,1.37,1.52,3.05,2.74,5.04,3.67s4.27,1.4,6.83,1.4c1.27,0,2.61-.22,4.03-.67,1.42-.45,2.8-1.04,4.16-1.77,1.36-.73,2.63-1.57,3.82-2.5,1.19-.93,2.2-1.88,3.02-2.85.1-.1.15-.19.15-.26s-.04-.15-.11-.22c-.12-.17-.3-.39-.52-.65s-.45-.49-.67-.69c-.12-.12-.22-.19-.3-.19-.05,0-.15.02-.3.07-.65.52-1.33,1.05-2.05,1.57-.72.52-1.49,1-2.31,1.42-.82.42-1.68.76-2.57,1.03-.9.26-1.83.39-2.8.39-1.54,0-3.01-.3-4.4-.91-1.39-.61-2.63-1.5-3.69-2.69-1.07-1.18-1.92-2.62-2.56-4.33-.63-1.7-.95-3.65-.95-5.84,0-.65.04-1.19.13-1.64.09-.45.25-.67.5-.67ZM772.57,591.22c.31-.77.78-1.52,1.4-2.24.62-.72,1.38-1.34,2.28-1.85.9-.51,1.94-.76,3.13-.76.99,0,1.9.19,2.7.56.81.37,1.5.89,2.07,1.55.57.66,1.01,1.42,1.32,2.28s.47,1.77.47,2.74c0,.57-.32.86-.97.86h-12.2c-.2,0-.36-.09-.49-.26-.12-.17-.19-.47-.19-.9,0-.55.15-1.21.47-1.98Z"/></g></g></svg></div>
+  <div class="sp-logo"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="270 455 540 187"><defs><style>      .cls-1 {        fill: #eff1ba;      }      .cls-2 {        fill: #cbd222;      }      .cls-3{display:none}      .cls-4{fill:#e8e8e8}    </style></defs><g><g><rect class="cls-2" x="472.38" y="550.13" width="12.44" height="12.44" transform="translate(-253.22 501.38) rotate(-45)"></rect><path class="cls-2" d="M489.39,477.01c-3.43,2.05-6.2,4.76-8.19,8.13-2.05,3.43-3.1,7.19-3.1,11.4.22,6.25,2.38,11.45,6.58,15.66,2.05,2.05,4.43,3.65,7.08,4.81,2.71,1.16,5.64,1.72,8.74,1.72h6.47c1.11,0,2.1.39,2.93,1.22.77.83,1.16,1.77,1.16,2.93s-.39,2.1-1.16,2.93c-.83.77-1.83,1.22-2.93,1.22h-32.48c-4.37,0-8.41,1.16-12.06,3.43-3.65,2.32-6.47,5.48-8.41,9.46l-2.43,5.03h55.11c4.09,0,7.8-1,11.23-3.04,3.38-1.99,6.09-4.65,8.08-8.02,1.99-3.32,2.99-7.08,3.04-11.18-.22-6.2-2.38-11.34-6.47-15.44-2.05-2.05-4.37-3.6-7.03-4.76-2.71-1.16-5.53-1.72-8.58-1.72h-6.36c-1.22,0-2.32-.44-3.15-1.27-.89-.83-1.38-1.88-1.44-3.1.05-1.33.44-2.38,1.33-3.21.88-.89,1.88-1.33,3.15-1.33h28.55v-17.93h-28.33c-4.1,0-7.91,1-11.34,3.04Z"></path><rect class="cls-2" x="489.98" y="550.13" width="12.44" height="12.44" transform="translate(-248.06 513.77) rotate(-45)"></rect><path class="cls-2" d="M574.42,491.95c-.61,0-1.66,0-3.1-.06h-2.93c-.94,0-1.6,0-1.99.06h-5.98c-4.87,0-9.35,1.16-13.33,3.54-4.04,2.38-7.19,5.59-9.63,9.63-2.38,3.98-3.54,8.46-3.54,13.33s1.16,9.29,3.54,13.33c2.43,3.98,5.59,7.19,9.63,9.57,3.98,2.38,8.47,3.6,13.33,3.6h38.51v-60.31c-3.1,1.83-6.69,3.49-10.84,4.92-4.09,1.49-8.69,2.27-13.67,2.38ZM580.79,527.03h-20.58c-2.38,0-4.37-.83-6.09-2.49-1.66-1.72-2.49-3.71-2.49-6.09s.83-4.43,2.49-6.09c1.72-1.66,3.71-2.54,6.09-2.54h20.58v17.21Z"></path><rect class="cls-2" x="636.47" y="550.13" width="12.44" height="12.44" transform="translate(-205.16 617.4) rotate(-45)"></rect><path class="cls-2" d="M663.6,491.51c-4.7-2.82-9.96-4.21-15.66-4.21h-23.07v-25.95l-6.31,2.99c-3.6,1.77-6.42,4.32-8.47,7.58-2.1,3.32-3.15,6.92-3.15,10.9v62.13h72.15v-26.5c0-5.75-1.44-10.95-4.21-15.66-2.82-4.7-6.58-8.46-11.29-11.29ZM661.17,527.03h-36.63c.22-1.22.33-2.43.33-3.65v-18.15h20.03c.77,0,1.77.11,3.04.22,1.33.17,2.71.55,4.21,1.16s2.93,1.6,4.37,2.93c.83.83,1.55,1.66,2.1,2.49,1.71,2.6,2.54,5.42,2.54,8.41v6.58Z"></path><path class="cls-2" d="M725.34,491.95c-.61,0-1.66,0-3.1-.06h-2.93c-.94,0-1.6,0-1.99.06h-5.98c-4.87,0-9.35,1.16-13.33,3.54-4.04,2.38-7.19,5.59-9.63,9.63-2.38,3.98-3.54,8.46-3.54,13.33s1.16,9.29,3.54,13.33c2.43,3.98,5.59,7.19,9.63,9.57,3.98,2.38,8.46,3.6,13.33,3.6h38.51v-60.31c-3.1,1.83-6.7,3.49-10.84,4.92-4.09,1.49-8.69,2.27-13.67,2.38ZM731.7,527.03h-20.58c-2.38,0-4.37-.83-6.09-2.49-1.66-1.72-2.49-3.71-2.49-6.09s.83-4.43,2.49-6.09c1.71-1.66,3.71-2.54,6.09-2.54h20.58v17.21Z"></path><polygon class="cls-2" points="793.39 472.86 782.65 462.07 771.87 472.86 782.65 483.59 793.39 472.86"></polygon><path class="cls-2" d="M784.92,486.75c-4.98,0-9.52,1.22-13.61,3.65-4.09,2.43-7.36,5.7-9.79,9.79-2.43,4.09-3.65,8.63-3.65,13.61v31.15h17.98v-27.72c0-3.49,1.22-6.42,3.65-8.85,2.43-2.43,5.42-3.71,8.85-3.71h14.5v-17.93h-17.93Z"></path></g><g><path class="cls-2" d="M443.32,544.95h-91.69c-20.07,0-36.34-16.27-36.34-36.34h0c0-20.07,16.27-36.34,36.34-36.34h91.69v72.69Z"></path><path class="cls-2" d="M277.15,544.95h91.69c20.07,0,36.34,16.27,36.34,36.34h0c0,20.07-16.27,36.34-36.34,36.34h-91.69s0-72.69,0-72.69Z"></path></g><g><path class="cls-4" d="M377.64,509.71h-39.19c-8.71,23.26,19.59,36.48,19.59,36.48,0,0,28.3-13.22,19.59-36.48Z"></path><path class="cls-1" d="M377.64,582.66h-39.19c-8.71-23.26,19.59-36.48,19.59-36.48,0,0,28.3,13.22,19.59,36.48Z"></path><path class="cls-1" d="M369.83,524.25h-23.57c-5.24,13.99,11.78,21.94,11.78,21.94,0,0,17.02-7.95,11.78-21.94Z"></path><path class="cls-4" d="M369.83,568.13h-23.57c-5.24-13.99,11.78-21.94,11.78-21.94,0,0,17.02,7.95,11.78,21.94Z"></path></g><g><path class="cls-2" d="M438.32,565.03h-22.05c-.2,0-.3.1-.3.3v2.01c0,.2.1.3.3.3.87,0,1.66.07,2.37.22.71.15,1.31.4,1.79.75.48.35.86.81,1.12,1.38.26.57.39,1.28.39,2.13v37.57c0,1.19-.14,2.14-.41,2.84-.27.7-.66,1.23-1.16,1.6-.5.37-1.1.62-1.81.73-.71.11-1.5.17-2.37.17-.12,0-.21.04-.24.11-.04.07-.06.14-.06.19v2.01c0,.05.02.11.06.19.04.07.12.11.24.11h22.05c.15,0,.24-.03.26-.09.02-.06.04-.13.04-.21v-2.01c0-.2-.1-.3-.3-.3-.87,0-1.66-.07-2.37-.22-.71-.15-1.31-.4-1.79-.75-.48-.35-.86-.81-1.12-1.38-.26-.57-.39-1.28-.39-2.13v-37.57c0-1.19.14-2.14.41-2.84.27-.7.66-1.23,1.16-1.6.5-.37,1.1-.62,1.81-.73.71-.11,1.5-.17,2.37-.17.12,0,.21-.04.24-.11.04-.07.06-.14.06-.19v-2.01s-.02-.11-.06-.19c-.04-.07-.12-.11-.24-.11Z"></path><path class="cls-2" d="M501.34,615.4c-.22-.1-.54-.18-.95-.24-.41-.06-.86-.14-1.36-.24-.5-.1-1.01-.23-1.53-.39-.52-.16-1-.4-1.44-.73-.43-.32-.79-.73-1.06-1.23-.27-.5-.41-1.12-.41-1.87,0-1.59.02-2.95.06-4.07s.07-2.12.11-3c.04-.88.07-1.7.11-2.44.04-.75.06-1.55.06-2.42,0-.92-.04-1.95-.11-3.08-.07-1.13-.21-2.28-.41-3.43-.2-1.16-.49-2.29-.88-3.4-.39-1.11-.88-2.09-1.49-2.95s-1.36-1.55-2.26-2.07-1.95-.78-3.17-.78c-1.12,0-2.06.01-2.83.04-.77.03-1.48.09-2.13.21-.65.11-1.29.27-1.92.48-.63.21-1.36.51-2.16.9-.81.39-1.77.86-2.87,1.42-1.11.56-2.46,1.25-4.05,2.07-.12.07-.22.12-.3.13-.07.01-.17.02-.3.02s-.22-.12-.3-.37v-5.82c0-.6-.21-.9-.63-.9-.05,0-.13.02-.24.07-.11.05-.22.1-.32.15l-12.35,5.82c-.22.12-.37.25-.45.37-.07.12-.11.25-.11.37,0,.27.04.45.13.54.09.09.2.16.35.21.52.15,1.07.28,1.64.39s1.11.26,1.6.43c.5.17.91.43,1.23.76.32.34.49.8.49,1.4v18.95c0,1.12-.22,1.97-.67,2.56-.45.58-.97,1.01-1.57,1.27-.6.26-1.19.44-1.79.52-.6.09-1.06.21-1.38.35-.1.05-.19.21-.26.48-.07.27-.11.47-.11.6,0,.15.02.37.08.65.05.29.15.45.3.5h19.48c.15-.05.25-.22.3-.5.05-.29.07-.5.07-.65,0-.12-.04-.32-.11-.6-.07-.27-.16-.43-.26-.48-.32-.15-.78-.27-1.38-.35-.6-.09-1.19-.26-1.79-.52-.6-.26-1.12-.68-1.57-1.27-.45-.58-.67-1.44-.67-2.56v-18.28c.02-.25.14-.45.36-.62.21-.16.42-.3.62-.43,1.59-.77,2.86-1.38,3.8-1.83s1.71-.78,2.29-1.01,1.08-.37,1.49-.43c.41-.06.88-.09,1.4-.09,1.49,0,2.66.3,3.51.9.84.6,1.49,1.37,1.92,2.31.43.95.71,2.01.82,3.21.11,1.19.17,2.4.17,3.62,0,1.57.01,2.98.04,4.25.02,1.27.04,2.46.04,3.58,0,.52,0,.98-.02,1.38-.01.4-.03.76-.06,1.1-.03.34-.06.67-.09.99-.04.32-.08.67-.13,1.05-.15,1.19-.45,2.1-.91,2.7-.46.61-.97,1.06-1.53,1.36-.56.3-1.11.49-1.64.58-.54.09-.96.21-1.29.35-.1.05-.19.21-.26.48-.07.27-.11.47-.11.6,0,.15.02.37.07.65.05.29.15.45.3.5h20.82c.15-.05.25-.22.3-.5.05-.29.07-.5.07-.65,0-.12-.04-.32-.11-.6-.07-.27-.16-.43-.26-.48Z"></path><path class="cls-2" d="M535.23,600.48c-1.17-1.09-2.44-2.06-3.82-2.91-1.38-.85-2.66-1.63-3.82-2.37-1.17-.73-2.15-1.46-2.93-2.18-.78-.72-1.18-1.5-1.18-2.35,0-.97.12-1.77.35-2.39.24-.62.55-1.11.95-1.47.4-.36.84-.6,1.34-.73.5-.12.99-.19,1.49-.19.84,0,1.59.19,2.24.58.65.39,1.21.9,1.7,1.53.48.63.91,1.34,1.29,2.13.37.78.71,1.56,1.01,2.33.07.22.24.39.5.48.26.1.53.15.8.15.3,0,.6-.09.91-.28.31-.19.47-.49.47-.91,0-1.54,0-2.79-.02-3.75-.01-.96-.04-1.72-.07-2.29-.04-.57-.11-.99-.22-1.25-.11-.26-.26-.45-.43-.58-.12-.07-.42-.2-.88-.37-.46-.17-1.02-.35-1.68-.52-.66-.17-1.38-.33-2.16-.47-.78-.14-1.56-.21-2.33-.21-1.47,0-2.94.26-4.42.78-1.48.52-2.82,1.22-4.01,2.09-1.19.87-2.16,1.87-2.91,3-.75,1.13-1.12,2.29-1.12,3.49,0,2.06.37,3.8,1.12,5.2.75,1.41,1.67,2.62,2.78,3.64,1.11,1.02,2.31,1.92,3.62,2.69,1.31.77,2.51,1.53,3.62,2.28,1.11.75,2.03,1.55,2.78,2.41.75.86,1.12,1.91,1.12,3.15,0,.62-.04,1.22-.13,1.79-.09.57-.27,1.08-.54,1.53-.27.45-.66.81-1.16,1.08-.5.27-1.14.41-1.94.41-1.04,0-1.94-.14-2.69-.43-.75-.29-1.39-.69-1.94-1.21-.55-.52-1.03-1.16-1.46-1.9-.42-.75-.85-1.58-1.27-2.5-.07-.15-.19-.32-.34-.52s-.32-.39-.5-.58c-.19-.19-.39-.34-.6-.47s-.4-.19-.58-.19c-.32,0-.63.06-.91.17-.29.11-.43.37-.43.76,0,.72.04,1.62.11,2.71.07,1.08.17,2.13.28,3.13s.22,1.87.32,2.59c.1.72.17,1.08.22,1.08h1.34c.2,0,.37-.06.52-.19.15-.12.3-.27.47-.43.16-.16.33-.31.5-.43.17-.12.37-.19.6-.19.05,0,.26.06.63.19.37.12.85.27,1.42.43.57.16,1.21.3,1.9.43.7.12,1.39.19,2.09.19,1.37,0,2.77-.22,4.2-.65s2.73-1.05,3.9-1.85c1.17-.8,2.13-1.77,2.87-2.93.75-1.16,1.12-2.46,1.12-3.9,0-1.94-.39-3.62-1.18-5.06-.78-1.43-1.76-2.69-2.93-3.79Z"></path><path class="cls-2" d="M579.37,586.13c-.05-.46-.1-.88-.15-1.27-.05-.39-.1-.64-.15-.77-.08-.22-.19-.4-.34-.54-.15-.14-.42-.21-.82-.21h-9.51c-.27-.02-.44-.1-.5-.22-.06-.12-.09-.29-.09-.49.12-.47.26-.96.41-1.46.15-.5.29-.97.41-1.42.12-.45.23-.85.32-1.21.09-.36.13-.63.13-.8,0-.15-.1-.27-.3-.37-.2-.1-.37-.15-.52-.15-.67,0-1.33.21-1.98.62s-1.25.88-1.81,1.42-1.06,1.08-1.49,1.62c-.44.55-.78.96-1.03,1.23-.42.4-.91.83-1.46,1.31-.55.47-1.11.95-1.68,1.42-.57.47-1.15.93-1.73,1.36s-1.13.81-1.62,1.14c-.07.05-.14.15-.19.3-.05.15-.08.29-.08.41.02.2.14.39.34.56.2.17.47.26.82.26h2.8v20.86c0,1.14.24,2.25.73,3.32.48,1.07,1.15,2.02,2,2.85.85.83,1.85,1.5,3.02,2s2.43.75,3.77.75c.97,0,1.9-.17,2.78-.5s1.7-.76,2.44-1.27c.75-.51,1.42-1.06,2.03-1.66.61-.6,1.13-1.16,1.55-1.68.42-.52.76-.97,1.01-1.34.25-.37.39-.58.41-.63.05-.1.12-.24.21-.43.09-.19.13-.44.13-.77,0-.15-.03-.36-.09-.63-.06-.27-.27-.41-.62-.41-.5,0-.95.17-1.34.5-.4.34-.86.7-1.38,1.1-.52.4-1.14.76-1.87,1.1-.72.34-1.66.5-2.8.5-.4,0-.8-.1-1.19-.3s-.75-.5-1.06-.9c-.31-.4-.57-.9-.76-1.49-.2-.6-.3-1.29-.3-2.09v-18.54c0-.12,0-.21.02-.26.01-.05.08-.07.2-.07h11.23c.2,0,.3-.07.3-.22,0-.3-.02-.68-.06-1.14-.04-.46-.08-.92-.13-1.38Z"></path><path class="cls-2" d="M603.52,574.06c1.59,0,2.86-.47,3.81-1.4.94-.93,1.42-2.2,1.42-3.79s-.47-2.86-1.42-3.81c-.95-.94-2.21-1.42-3.81-1.42s-2.86.47-3.81,1.42c-.94.95-1.42,2.21-1.42,3.81s.47,2.85,1.42,3.79,2.21,1.4,3.81,1.4Z"></path><path class="cls-2" d="M613.96,615.4c-.32-.15-.78-.27-1.38-.35-.6-.09-1.19-.26-1.79-.52-.6-.26-1.12-.67-1.57-1.23s-.67-1.39-.67-2.48v-27.53c0-.6-.21-.9-.63-.9-.05,0-.13.03-.24.07-.11.05-.22.1-.32.15l-12.35,5.82c-.22.12-.37.25-.45.37-.07.12-.11.25-.11.37,0,.27.04.45.13.54.09.09.2.16.35.21.52.15,1.07.28,1.64.39s1.11.26,1.6.43c.5.17.91.43,1.23.77.32.34.48.8.48,1.4v17.91c0,1.1-.22,1.92-.67,2.48s-.97.97-1.57,1.23c-.6.26-1.19.44-1.79.52-.6.09-1.06.21-1.38.35-.1.05-.19.21-.26.48-.07.27-.11.47-.11.6,0,.15.02.37.08.65.05.29.15.45.3.5h19.48c.15-.05.25-.22.3-.5.05-.29.07-.5.07-.65,0-.12-.04-.32-.11-.6-.07-.27-.16-.43-.26-.48Z"></path><path class="cls-2" d="M653.44,586.13c-.05-.46-.1-.88-.15-1.27-.05-.39-.1-.64-.15-.77-.08-.22-.19-.4-.34-.54-.15-.14-.42-.21-.82-.21h-9.51c-.27-.02-.44-.1-.5-.22-.06-.12-.09-.29-.09-.49.12-.47.26-.96.41-1.46.15-.5.29-.97.41-1.42.12-.45.23-.85.32-1.21.09-.36.13-.63.13-.8,0-.15-.1-.27-.3-.37-.2-.1-.37-.15-.52-.15-.67,0-1.33.21-1.98.62s-1.25.88-1.81,1.42-1.06,1.08-1.49,1.62c-.44.55-.78.96-1.03,1.23-.42.4-.91.83-1.46,1.31-.55.47-1.11.95-1.68,1.42-.57.47-1.15.93-1.73,1.36s-1.13.81-1.62,1.14c-.07.05-.14.15-.19.3-.05.15-.08.29-.08.41.02.2.14.39.34.56.2.17.47.26.82.26h2.8v20.86c0,1.14.24,2.25.73,3.32.48,1.07,1.15,2.02,2,2.85.85.83,1.85,1.5,3.02,2s2.43.75,3.77.75c.97,0,1.9-.17,2.78-.5s1.7-.76,2.44-1.27c.75-.51,1.42-1.06,2.03-1.66.61-.6,1.13-1.16,1.55-1.68.42-.52.76-.97,1.01-1.34.25-.37.39-.58.41-.63.05-.1.12-.24.21-.43.09-.19.13-.44.13-.77,0-.15-.03-.36-.09-.63-.06-.27-.27-.41-.62-.41-.5,0-.95.17-1.34.5-.4.34-.86.7-1.38,1.1-.52.4-1.14.76-1.87,1.1-.72.34-1.66.5-2.8.5-.4,0-.8-.1-1.19-.3s-.75-.5-1.06-.9c-.31-.4-.57-.9-.76-1.49-.2-.6-.3-1.29-.3-2.09v-18.54c0-.12,0-.21.02-.26.01-.05.08-.07.2-.07h11.23c.2,0,.3-.07.3-.22,0-.3-.02-.68-.06-1.14-.04-.46-.08-.92-.13-1.38Z"></path><path class="cls-2" d="M708.26,611.45l-2.16.15c-1.12,0-1.93-.24-2.42-.71-.5-.47-.81-1.26-.93-2.35v-25.74c0-.22-.12-.34-.37-.34-.15,0-.3.01-.47.04-.16.03-.32.06-.47.11l-11.38,3.25c-.27.07-.44.19-.5.34-.06.15-.09.32-.09.52,0,.22.06.38.17.47.11.09.26.15.43.19.17.04.37.06.58.07.21.01.4.04.58.09.67.15,1.3.48,1.88.99.58.51.91,1.13.99,1.85v19.96c-.32.45-.75.88-1.27,1.29-.52.41-1.08.77-1.68,1.08-.6.31-1.22.57-1.87.77-.65.2-1.27.3-1.87.3-.85,0-1.67-.12-2.46-.37-.8-.25-1.5-.61-2.13-1.08-.62-.47-1.13-1.05-1.51-1.73s-.58-1.45-.58-2.29v-25.18c0-.42-.12-.63-.37-.63-.15,0-.3.01-.47.04-.16.03-.32.06-.47.11l-11.38,3.28c-.27.07-.44.19-.5.34-.06.15-.09.32-.09.52,0,.22.06.38.17.47s.26.15.43.19c.17.04.37.06.58.07.21.01.4.04.58.09.67.15,1.3.48,1.88.99.58.51.91,1.13.99,1.85v22.54c0,1.02.36,1.89,1.08,2.61.72.72,1.62,1.31,2.7,1.77,1.08.46,2.25.8,3.51,1.01,1.25.21,2.41.32,3.45.32.62,0,1.19-.05,1.72-.15.52-.1,1.01-.24,1.47-.41.46-.17.93-.35,1.4-.54.47-.19.98-.38,1.53-.58l5.97-2.91s.02-.07.08-.07h.15c.17,0,.3.05.37.15v3.58c0,.2.02.4.06.62.04.21.14.32.32.32.02,0,.14-.03.33-.09.2-.06.32-.11.37-.13l11.34-4.66c.25-.12.4-.32.47-.6.06-.27.09-.43.09-.48,0-.15-.01-.39-.04-.73s-.09-.5-.19-.5Z"></path><path class="cls-2" d="M747.96,586.13c-.05-.46-.1-.88-.15-1.27-.05-.39-.1-.64-.15-.77-.07-.22-.19-.4-.34-.54-.15-.14-.42-.21-.82-.21h-9.51c-.27-.02-.44-.1-.5-.22-.06-.12-.09-.29-.09-.49.12-.47.26-.96.41-1.46.15-.5.29-.97.41-1.42.12-.45.23-.85.32-1.21.09-.36.13-.63.13-.8,0-.15-.1-.27-.3-.37-.2-.1-.37-.15-.52-.15-.67,0-1.33.21-1.98.62-.65.41-1.25.88-1.81,1.42s-1.06,1.08-1.49,1.62c-.44.55-.78.96-1.03,1.23-.42.4-.91.83-1.46,1.31-.55.47-1.11.95-1.68,1.42s-1.15.93-1.73,1.36-1.13.81-1.62,1.14c-.07.05-.14.15-.19.3-.05.15-.07.29-.07.41.02.2.14.39.34.56.2.17.47.26.82.26h2.8v20.86c0,1.14.24,2.25.73,3.32.49,1.07,1.15,2.02,2,2.85.84.83,1.85,1.5,3.02,2,1.17.5,2.42.75,3.77.75.97,0,1.9-.17,2.78-.5.88-.34,1.7-.76,2.44-1.27.75-.51,1.42-1.06,2.03-1.66.61-.6,1.12-1.16,1.55-1.68.42-.52.76-.97,1.01-1.34.25-.37.39-.58.41-.63.05-.1.12-.24.2-.43.09-.19.13-.44.13-.77,0-.15-.03-.36-.09-.63-.06-.27-.27-.41-.62-.41-.5,0-.94.17-1.34.5s-.86.7-1.38,1.1c-.52.4-1.14.76-1.87,1.1s-1.65.5-2.8.5c-.4,0-.8-.1-1.19-.3-.4-.2-.75-.5-1.06-.9-.31-.4-.57-.9-.77-1.49-.2-.6-.3-1.29-.3-2.09v-18.54c0-.12,0-.21.02-.26.01-.05.08-.07.21-.07h11.23c.2,0,.3-.07.3-.22,0-.3-.02-.68-.06-1.14-.04-.46-.08-.92-.13-1.38Z"></path><path class="cls-2" d="M771.7,597.23h22.01c.32,0,.55-.21.69-.62.14-.41.21-.79.21-1.14,0-1.07-.22-2.18-.67-3.34-.45-1.16-1-2.24-1.64-3.26-.65-1.02-1.34-1.92-2.07-2.69-.73-.77-1.39-1.31-1.96-1.6-.5-.3-.99-.58-1.47-.84-.48-.26-1.01-.49-1.57-.67-.56-.19-1.18-.34-1.85-.45s-1.43-.17-2.28-.17c-2.84,0-5.37.5-7.59,1.49-2.23,1-4.11,2.39-5.65,4.18s-2.72,3.91-3.54,6.36c-.82,2.45-1.23,5.13-1.23,8.04,0,1.99.35,3.95,1.06,5.88.71,1.93,1.75,3.65,3.11,5.17,1.37,1.52,3.05,2.74,5.04,3.67s4.27,1.4,6.83,1.4c1.27,0,2.61-.22,4.03-.67,1.42-.45,2.8-1.04,4.16-1.77,1.36-.73,2.63-1.57,3.82-2.5,1.19-.93,2.2-1.88,3.02-2.85.1-.1.15-.19.15-.26s-.04-.15-.11-.22c-.12-.17-.3-.39-.52-.65s-.45-.49-.67-.69c-.12-.12-.22-.19-.3-.19-.05,0-.15.02-.3.07-.65.52-1.33,1.05-2.05,1.57-.72.52-1.49,1-2.31,1.42-.82.42-1.68.76-2.57,1.03-.9.26-1.83.39-2.8.39-1.54,0-3.01-.3-4.4-.91-1.39-.61-2.63-1.5-3.69-2.69-1.07-1.18-1.92-2.62-2.56-4.33-.63-1.7-.95-3.65-.95-5.84,0-.65.04-1.19.13-1.64.09-.45.25-.67.5-.67ZM772.57,591.22c.31-.77.78-1.52,1.4-2.24.62-.72,1.38-1.34,2.28-1.85.9-.51,1.94-.76,3.13-.76.99,0,1.9.19,2.7.56.81.37,1.5.89,2.07,1.55.57.66,1.01,1.42,1.32,2.28s.47,1.77.47,2.74c0,.57-.32.86-.97.86h-12.2c-.2,0-.36-.09-.49-.26-.12-.17-.19-.47-.19-.9,0-.55.15-1.21.47-1.98Z"></path></g></g></svg></div>
   <div class="sp-line"></div>
-  <p class="sp-tag"><b>SIR </b>Data Repository</p>
-  <p class="sp-sub">Adjudicated Electoral Rolls · West Bengal</p>
+  <p class="sp-tag"><b>Data </b>for Better Lives</p>
+  <p class="sp-sub">Domkal Constituency · Booth Analysis 2021–2024</p>
   <div class="sp-bar"></div>
 </div>
 <script>
 (function(){
-  var MIN=3200,start=Date.now();
+  var MIN=3800,start=Date.now();
   function go(){
     var wait=Math.max(0,MIN-(Date.now()-start));
     setTimeout(function(){
@@ -259,100 +188,237 @@ footer a{color:var(--accent);text-decoration:none}
 })();
 </script>
 
-<!-- HEADER -->
 <header>
-  <div class="logo-wrap">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="270 455 540 187"><defs><style>.h2{fill:#cbd222}.h4{fill:#e8e8e8}.h1{fill:#eff1ba}</style></defs><g><g><rect class="h2" x="472.38" y="550.13" width="12.44" height="12.44" transform="translate(-253.22 501.38) rotate(-45)"/><path class="h2" d="M489.39,477.01c-3.43,2.05-6.2,4.76-8.19,8.13-2.05,3.43-3.1,7.19-3.1,11.4.22,6.25,2.38,11.45,6.58,15.66,2.05,2.05,4.43,3.65,7.08,4.81,2.71,1.16,5.64,1.72,8.74,1.72h6.47c1.11,0,2.1.39,2.93,1.22.77.83,1.16,1.77,1.16,2.93s-.39,2.1-1.16,2.93c-.83.77-1.83,1.22-2.93,1.22h-32.48c-4.37,0-8.41,1.16-12.06,3.43-3.65,2.32-6.47,5.48-8.41,9.46l-2.43,5.03h55.11c4.09,0,7.8-1,11.23-3.04,3.38-1.99,6.09-4.65,8.08-8.02,1.99-3.32,2.99-7.08,3.04-11.18-.22-6.2-2.38-11.34-6.47-15.44-2.05-2.05-4.37-3.6-7.03-4.76-2.71-1.16-5.53-1.72-8.58-1.72h-6.36c-1.22,0-2.32-.44-3.15-1.27-.89-.83-1.38-1.88-1.44-3.1.05-1.33.44-2.38,1.33-3.21.88-.89,1.88-1.33,3.15-1.33h28.55v-17.93h-28.33c-4.1,0-7.91,1-11.34,3.04Z"/><rect class="h2" x="489.98" y="550.13" width="12.44" height="12.44" transform="translate(-248.06 513.77) rotate(-45)"/><path class="h2" d="M574.42,491.95c-.61,0-1.66,0-3.1-.06h-2.93c-.94,0-1.6,0-1.99.06h-5.98c-4.87,0-9.35,1.16-13.33,3.54-4.04,2.38-7.19,5.59-9.63,9.63-2.38,3.98-3.54,8.46-3.54,13.33s1.16,9.29,3.54,13.33c2.43,3.98,5.59,7.19,9.63,9.57,3.98,2.38,8.47,3.6,13.33,3.6h38.51v-60.31c-3.1,1.83-6.69,3.49-10.84,4.92-4.09,1.49-8.69,2.27-13.67,2.38ZM580.79,527.03h-20.58c-2.38,0-4.37-.83-6.09-2.49-1.66-1.72-2.49-3.71-2.49-6.09s.83-4.43,2.49-6.09c1.72-1.66,3.71-2.54,6.09-2.54h20.58v17.21Z"/><rect class="h2" x="636.47" y="550.13" width="12.44" height="12.44" transform="translate(-205.16 617.4) rotate(-45)"/><path class="h2" d="M663.6,491.51c-4.7-2.82-9.96-4.21-15.66-4.21h-23.07v-25.95l-6.31,2.99c-3.6,1.77-6.42,4.32-8.47,7.58-2.1,3.32-3.15,6.92-3.15,10.9v62.13h72.15v-26.5c0-5.75-1.44-10.95-4.21-15.66-2.82-4.7-6.58-8.46-11.29-11.29ZM661.17,527.03h-36.63c.22-1.22.33-2.43.33-3.65v-18.15h20.03c.77,0,1.77.11,3.04.22,1.33.17,2.71.55,4.21,1.16s2.93,1.6,4.37,2.93c.83.83,1.55,1.66,2.1,2.49,1.71,2.6,2.54,5.42,2.54,8.41v6.58Z"/><path class="h2" d="M725.34,491.95c-.61,0-1.66,0-3.1-.06h-2.93c-.94,0-1.6,0-1.99.06h-5.98c-4.87,0-9.35,1.16-13.33,3.54-4.04,2.38-7.19,5.59-9.63,9.63-2.38,3.98-3.54,8.46-3.54,13.33s1.16,9.29,3.54,13.33c2.43,3.98,5.59,7.19,9.63,9.57,3.98,2.38,8.46,3.6,13.33,3.6h38.51v-60.31c-3.1,1.83-6.7,3.49-10.84,4.92-4.09,1.49-8.69,2.27-13.67,2.38ZM731.7,527.03h-20.58c-2.38,0-4.37-.83-6.09-2.49-1.66-1.72-2.49-3.71-2.49-6.09s.83-4.43,2.49-6.09c1.71-1.66,3.71-2.54,6.09-2.54h20.58v17.21Z"/><polygon class="h2" points="793.39 472.86 782.65 462.07 771.87 472.86 782.65 483.59 793.39 472.86"/><path class="h2" d="M784.92,486.75c-4.98,0-9.52,1.22-13.61,3.65-4.09,2.43-7.36,5.7-9.79,9.79-2.43,4.09-3.65,8.63-3.65,13.61v31.15h17.98v-27.72c0-3.49,1.22-6.42,3.65-8.85,2.43-2.43,5.42-3.71,8.85-3.71h14.5v-17.93h-17.93Z"/></g><g><path class="h2" d="M443.32,544.95h-91.69c-20.07,0-36.34-16.27-36.34-36.34h0c0-20.07,16.27-36.34,36.34-36.34h91.69v72.69Z"/><path class="h2" d="M277.15,544.95h91.69c20.07,0,36.34,16.27,36.34,36.34h0c0,20.07-16.27,36.34-36.34,36.34h-91.69s0-72.69,0-72.69Z"/></g><g><path class="h4" d="M377.64,509.71h-39.19c-8.71,23.26,19.59,36.48,19.59,36.48,0,0,28.3-13.22,19.59-36.48Z"/><path class="h1" d="M377.64,582.66h-39.19c-8.71-23.26,19.59-36.48,19.59-36.48,0,0,28.3,13.22,19.59,36.48Z"/><path class="h1" d="M369.83,524.25h-23.57c-5.24,13.99,11.78,21.94,11.78,21.94,0,0,17.02-7.95,11.78-21.94Z"/><path class="h4" d="M369.83,568.13h-23.57c-5.24-13.99,11.78-21.94,11.78-21.94,0,0,17.02,7.95,11.78,21.94Z"/></g></g></svg>
-    <div class="logo-divider"></div>
-    <span class="site-title">SIR Data Repository</span>
+  <div class="badge">ELECTORAL INTELLIGENCE · DOMKAL AC · 280-BOOTH ANALYSIS</div>
+  <h1>Domkal 2021→2024<br>Corrected Booth-Level Shift</h1>
+  <p class="sub">280 normalised booth units · Auxiliary booths merged · 5 room-splits re-merged · Offset-corrected mapping</p>
+  <div class="pills">
+    <span class="pill p-tmc">TMC — Abu Taher Khan / Jafikul Islam</span>
+    <span class="pill p-cpm">CPM — Md. Salim / Md. Mostafijur Rahaman</span>
+    <span class="pill p-bjp">BJP — Gouri Shankar Ghosh / Biyamma Mondal</span>
   </div>
-  <span class="header-tag">Under Adjudication</span>
 </header>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">Summary Revision · West Bengal · 2025–26</div>
-  <h1>SIR <em>Adjudicated</em><br>Data Repository</h1>
-  <p>Booth-level inclusion and deletion data from the Special Intensive Revision process, assembly-wise. Each entry has been parsed, OCR-verified, and structured for analysis.</p>
-  <div class="hero-stats" id="hero-stats">
-    <div class="h-stat"><div class="h-stat-val" id="stat-ac">—</div><div class="h-stat-lbl">Assemblies</div></div>
-    <div class="h-stat"><div class="h-stat-val" id="stat-phases">—</div><div class="h-stat-lbl">Total Phases</div></div>
-    <div class="h-stat"><div class="h-stat-val" id="stat-inc" style="color:#4ade80">—</div><div class="h-stat-lbl">Inclusions</div></div>
-    <div class="h-stat"><div class="h-stat-val" id="stat-del" style="color:#ff6b6b">—</div><div class="h-stat-lbl">Deletions</div></div>
-  </div>
-</div>
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#transfers">Vote Transfers</a>
+  <a href="#strength">Strengths</a>
+  <a href="#losses">Biggest Losses</a>
+  <a href="#recovery">Recovery Targets</a>
+  <a href="#reversals">Reversals</a>
+  <a href="#bjp">BJP Dynamics</a>
+  <a href="#strategy">Strategy</a>
+</nav>
 
-<!-- MAIN -->
 <main>
-  <div class="section-header">
-    <h2 class="section-title">Available Assemblies</h2>
-    <span class="section-sub" id="ac-count">Loading…</span>
+<section id="overview">
+  <div class="sec-lbl">Section 01</div>
+  <h2>The Big Picture</h2>
+  <div class="grid4" id="scorecards"></div>
+  <div class="bars2" id="bars"></div>
+  <div class="dist-wrap">
+    <h3>TMC 2024 Vote Share Distribution (280 Booths)</h3>
+    <div class="dist-bars" id="dist-bars"></div>
+    <div class="dist-lbls" id="dist-lbls"></div>
   </div>
-  <div class="cards-grid" id="cards-grid">
-    <div class="empty"><div class="loading-dots"><span></span><span></span><span></span></div><p style="margin-top:12px">Loading assembly data…</p></div>
-  </div>
+  <div id="overview-insights"></div>
+</section>
+<section id="transfers">
+  <div class="sec-lbl">Section 02</div>
+  <h2>Vote Transfer Analysis</h2>
+  <div class="ins red"><p><strong>Methodology note:</strong> Transfer signals are inferred from simultaneous swing in both parties at booth level. Booth numbers shown are the 2021 merged group numbers.</p></div>
+  <h3 style="color:var(--cpm);margin-top:16px">⚠ TMC → CPM — Top 15 Transfer Booths</h3>
+  <div class="ins red" id="tmc-cpm-insight"></div>
+  <div class="tbl-wrap"><table id="tbl-tmc-cpm"></table></div>
+  <div class="hr"></div>
+  <h3 style="color:var(--tmc)">✅ CPM → TMC — Top 15 Transfer Booths</h3>
+  <div class="ins grn" id="cpm-tmc-insight"></div>
+  <div class="tbl-wrap"><table id="tbl-cpm-tmc"></table></div>
+  <div class="hr"></div>
+  <h3 style="color:var(--bjp)">BJP → CPM — Top 15</h3>
+  <div class="tbl-wrap"><table id="tbl-bjp-cpm"></table></div>
+  <div class="hr"></div>
+  <h3 style="color:var(--bjp)">CPM → BJP — Top 15</h3>
+  <div class="ins org"><p id="cpm-bjp-insight-txt"></p></div>
+  <div class="tbl-wrap"><table id="tbl-cpm-bjp"></table></div>
+</section>
+<section id="strength">
+  <div class="sec-lbl">Section 03</div>
+  <h2>TMC Strongholds &amp; Weak Zones</h2>
+  <h3 style="color:var(--tmc)">Top 15 TMC Booths by 2024 Vote Share</h3>
+  <div class="tbl-wrap"><table id="tbl-strong"></table></div>
+  <div class="hr"></div>
+  <h3 style="color:var(--cpm)">Bottom 15 TMC Booths by 2024 Vote Share</h3>
+  <div class="ins red" id="weak-insight"></div>
+  <div class="tbl-wrap"><table id="tbl-weak"></table></div>
+  <div class="hr"></div>
+  <h3 style="color:var(--tmc)">Biggest TMC Swing Gains</h3>
+  <div class="tbl-wrap"><table id="tbl-gains"></table></div>
+</section>
+<section id="losses">
+  <div class="sec-lbl">Section 04</div>
+  <h2>Biggest TMC Swing Losses</h2>
+  <div class="ins red" id="losses-insight"></div>
+  <div class="tbl-wrap"><table id="tbl-losses"></table></div>
+</section>
+<section id="recovery">
+  <div class="sec-lbl">Section 05</div>
+  <h2>Priority Recovery Targets</h2>
+  <div class="ins red"><p>CPM-leading booths ranked by recovery potential. Winning back just 8–10 flips the lead substantially.</p></div>
+  <div class="tbl-wrap"><table id="tbl-recovery"></table></div>
+</section>
+<section id="reversals">
+  <div class="sec-lbl">Section 06</div>
+  <h2>All 66 TMC→CPM Reversals</h2>
+  <div class="ins red"><p>Booths where TMC led in 2021 but CPM leads in 2024. Sorted by magnitude of collapse. <strong>These 66 booths are the primary battleground.</strong></p></div>
+  <div class="tbl-wrap" style="max-height:600px;overflow-y:auto"><table id="tbl-reversals"></table></div>
+</section>
+<section id="bjp">
+  <div class="sec-lbl">Section 07</div>
+  <h2>BJP Dynamics</h2>
+  <div class="ins org"><p id="bjp-insight-txt"></p></div>
+  <h3 style="color:var(--bjp);margin-top:16px">BJP-Led Booths in 2024</h3>
+  <div class="tbl-wrap"><table id="tbl-bjp"></table></div>
+</section>
+<section id="strategy">
+  <div class="sec-lbl">Section 08</div>
+  <h2>Strategic Recommendations for TMC</h2>
+  <div class="strat" id="strat-grid"></div>
+  <div class="ins blu" style="margin-top:16px"><p id="strat-summary"></p></div>
+</section>
 </main>
 
-<footer>
-  <p>© 2025 <a href="https://sabarinstitute.org" target="_blank">Sabar Institute</a> · Data for Better Lives</p>
-  <p>SIR 2025–26 · West Bengal Legislative Assembly</p>
-</footer>
-
 <script>
-async function loadAssemblies(){
-  let assemblies=[];
-  try{
-    const r=await fetch('data/assemblies.json');
-    assemblies=await r.json();
-  }catch(e){
-    document.getElementById('cards-grid').innerHTML='<div class="empty"><p>Could not load assembly registry. Ensure <code>data/assemblies.json</code> exists.</p></div>';
-    return;
-  }
+const D = {"s": {"tmc21": 127173, "cpm21": 79968, "bjp21": 12247, "tmc24": 108805, "cpm24": 95334, "bjp24": 12065, "t21": 225097, "t24": 222656, "tmc%21": 56.5, "cpm%21": 35.5, "bjp%21": 5.4, "tmc%24": 48.9, "cpm%24": 42.8, "bjp%24": 5.4, "tmc_sw": -7.6, "cpm_sw": 7.3, "lead21": 47205, "lead24": 13471, "w21": {"TMC": 209, "CPM": 60, "BJP": 11}, "w24": {"TMC": 154, "CPM": 115, "BJP": 11}, "rev": 82, "tmc_cpm": 66, "cpm_tmc": 12}, "dist": {"<30%": 23, "30-40%": 60, "40-50%": 75, "50-60%": 65, "60-70%": 31, ">70%": 26}, "gains": [["142", 145, 37.7, 55.3, 1.4, 236, 346, 9, 626, 70.7, 26.7, 0.8, 448, 169, 5, 634, 33.0, -28.6, -0.6, "CPM", "TMC", "Dakshinnagar"], ["260+260A", 265, 36.1, 43.4, 18.2, 375, 451, 189, 1038, 64.1, 22.8, 10.2, 644, 229, 103, 1005, 28.0, -20.7, -8.0, "CPM", "TMC", "Harurpara"], ["34", 34, 7.0, 91.1, 0.8, 43, 563, 5, 618, 32.7, 60.8, 1.7, 229, 426, 12, 701, 25.7, -30.3, 0.9, "CPM", "CPM", "Sahabajpur Mohonerpara"], ["143", 146, 41.2, 50.9, 5.9, 250, 309, 36, 607, 66.9, 26.9, 3.3, 432, 174, 21, 646, 25.7, -24.0, -2.7, "CPM", "TMC", "Mamudpur"], ["134", 136, 41.5, 52.5, 2.7, 261, 330, 17, 629, 65.5, 30.0, 1.0, 400, 183, 6, 611, 24.0, -22.5, -1.7, "CPM", "TMC", "Juginda Malithapara"], ["140", 143, 61.3, 33.2, 1.5, 482, 261, 12, 786, 81.4, 16.4, 0.9, 617, 124, 7, 758, 20.1, -16.8, -0.6, "TMC", "TMC", "Dakshinnagar"], ["168", 172, 32.0, 25.3, 39.8, 244, 193, 303, 762, 51.1, 15.7, 31.2, 409, 126, 250, 801, 19.0, -9.6, -8.6, "BJP", "TMC", "Bhatsala"], ["33", 33, 25.3, 69.7, 1.3, 151, 416, 8, 597, 42.9, 50.1, 2.2, 257, 300, 13, 599, 17.6, -19.6, 0.8, "CPM", "CPM", "Sahabajpur Mohonerpara"], ["146", 149, 53.0, 44.9, 0.3, 495, 419, 3, 934, 70.5, 27.3, 0.4, 666, 258, 4, 945, 17.5, -17.6, 0.1, "TMC", "TMC", "Uttar Gobindapur"], ["220", 225, 29.3, 65.6, 0.8, 153, 343, 4, 523, 46.2, 48.6, 1.6, 234, 246, 8, 506, 17.0, -17.0, 0.8, "CPM", "CPM", "Kupila"], ["149+149A", 152, 53.4, 41.0, 1.5, 661, 507, 18, 1237, 68.3, 28.6, 0.9, 865, 362, 12, 1267, 14.8, -12.4, -0.5, "TMC", "TMC", "Sekahalipara"], ["145", 148, 72.9, 21.7, 3.7, 434, 129, 22, 595, 86.8, 9.3, 3.2, 541, 58, 20, 623, 13.9, -12.4, -0.5, "TMC", "TMC", "Uttar Gobindapur"], ["255", 260, 71.6, 26.4, 0.6, 474, 175, 4, 662, 84.8, 12.0, 1.2, 543, 77, 8, 640, 13.2, -14.4, 0.6, "TMC", "TMC", "Baisnabpara"], ["141", 144, 52.9, 43.8, 0.9, 491, 406, 8, 928, 65.8, 32.9, 0.2, 593, 296, 2, 901, 12.9, -10.9, -0.6, "TMC", "TMC", "Dakshinnagar"], ["166", 170, 72.2, 26.3, 0.7, 332, 121, 3, 460, 84.7, 13.7, 0.4, 427, 69, 2, 504, 12.5, -12.6, -0.3, "TMC", "TMC", "Ramna Basantapur"]], "losses": [["271", 276, 83.0, 12.3, 1.3, 567, 84, 9, 683, 40.8, 56.4, 0.6, 279, 385, 4, 683, -42.2, 44.1, -0.7, "TMC", "CPM", "Kamurdiar"], ["214", 219, 73.7, 24.4, 0.8, 569, 188, 6, 772, 34.4, 59.4, 0.4, 246, 425, 3, 715, -39.3, 35.1, -0.4, "TMC", "CPM", "Narojpur"], ["205", 210, 85.3, 12.5, 2.1, 561, 82, 14, 658, 47.5, 46.5, 2.3, 308, 301, 15, 648, -37.7, 34.0, 0.2, "TMC", "TMC", "Nowdapara"], ["91", 92, 69.5, 28.3, 1.0, 471, 192, 7, 678, 33.2, 64.5, 0.7, 203, 394, 4, 611, -36.2, 36.2, -0.4, "TMC", "CPM", "Paschim Pardiar"], ["267+267A", 272, 92.7, 5.3, 0.5, 931, 53, 5, 1004, 59.2, 36.4, 0.8, 551, 339, 7, 931, -33.5, 31.1, 0.3, "TMC", "TMC", "Nischintapur"], ["274", 279, 82.0, 13.8, 1.5, 701, 118, 13, 855, 49.9, 45.1, 1.0, 407, 368, 8, 816, -32.1, 31.3, -0.5, "TMC", "TMC", "Kamurdiar"], ["207", 212, 84.5, 7.5, 6.0, 551, 49, 39, 652, 54.1, 29.5, 14.2, 350, 191, 92, 647, -30.4, 22.0, 8.2, "TMC", "TMC", "Dumurtala"], ["236+236A", 241, 72.1, 22.7, 1.2, 782, 246, 13, 1084, 42.3, 52.8, 1.7, 442, 552, 18, 1046, -29.9, 30.1, 0.5, "TMC", "CPM", "Kuchimora"], ["210", 215, 93.6, 5.1, 0.8, 698, 38, 6, 746, 63.7, 31.4, 1.2, 487, 240, 9, 764, -29.8, 26.3, 0.4, "TMC", "TMC", "Raipur"], ["235", 240, 73.0, 24.4, 0.9, 499, 167, 6, 684, 43.2, 51.8, 2.3, 295, 354, 16, 683, -29.8, 27.4, 1.5, "TMC", "CPM", "Kuchimora"], ["75", 76, 70.7, 27.2, 0.8, 424, 163, 5, 600, 41.0, 56.4, 1.0, 215, 296, 5, 525, -29.7, 29.2, 0.1, "TMC", "CPM", "Madhya Goribpur"], ["217", 222, 69.5, 26.7, 1.5, 560, 215, 12, 806, 40.3, 57.3, 0.7, 327, 465, 6, 812, -29.2, 30.6, -0.7, "TMC", "CPM", "Katakopra"], ["261", 266, 67.0, 27.4, 4.3, 313, 128, 20, 467, 37.9, 52.0, 7.6, 170, 233, 34, 448, -29.1, 24.6, 3.3, "TMC", "CPM", "Harurpara"], ["280+280A", 285, 81.9, 12.7, 1.2, 880, 136, 13, 1074, 53.2, 42.0, 0.8, 572, 451, 9, 1075, -28.7, 29.3, -0.4, "TMC", "TMC", "Boxipur"], ["268+268A", 273, 84.3, 13.8, 1.0, 961, 157, 11, 1140, 55.8, 42.2, 0.8, 595, 450, 9, 1067, -28.5, 28.4, -0.1, "TMC", "TMC", "Mominpur"]], "strong": [["265", 270, 97.1, 1.7, 0.4, 734, 13, 3, 756, 90.6, 6.6, 0.4, 619, 45, 3, 683, -6.5, 4.9, 0.0, "TMC", "TMC", "Nischintapur"], ["145", 148, 72.9, 21.7, 3.7, 434, 129, 22, 595, 86.8, 9.3, 3.2, 541, 58, 20, 623, 13.9, -12.4, -0.5, "TMC", "TMC", "Uttar Gobindapur"], ["255", 260, 71.6, 26.4, 0.6, 474, 175, 4, 662, 84.8, 12.0, 1.2, 543, 77, 8, 640, 13.2, -14.4, 0.6, "TMC", "TMC", "Baisnabpara"], ["166", 170, 72.2, 26.3, 0.7, 332, 121, 3, 460, 84.7, 13.7, 0.4, 427, 69, 2, 504, 12.5, -12.6, -0.3, "TMC", "TMC", "Ramna Basantapur"], ["129", 131, 84.1, 10.5, 3.4, 697, 87, 28, 829, 84.7, 13.2, 1.5, 712, 111, 13, 841, 0.6, 2.7, -1.8, "TMC", "TMC", "Juginda Malopara"], ["228", 233, 86.4, 12.0, 0.7, 750, 104, 6, 868, 83.8, 14.6, 0.8, 725, 126, 7, 865, -2.6, 2.6, 0.1, "TMC", "TMC", "Aminabad SK. Para"], ["195", 200, 88.5, 9.1, 0.8, 630, 65, 6, 712, 82.4, 16.3, 0.1, 598, 118, 1, 726, -6.1, 7.1, -0.7, "TMC", "TMC", "Mehedipara"], ["140", 143, 61.3, 33.2, 1.5, 482, 261, 12, 786, 81.4, 16.4, 0.9, 617, 124, 7, 758, 20.1, -16.8, -0.6, "TMC", "TMC", "Dakshinnagar"], ["232", 237, 88.6, 8.6, 0.6, 559, 54, 4, 631, 79.4, 19.2, 0.3, 501, 121, 2, 631, -9.2, 10.6, -0.3, "TMC", "TMC", "Sahadiar"], ["172", 176, 70.1, 27.7, 0.5, 585, 231, 4, 834, 79.2, 19.3, 0.2, 682, 166, 2, 861, 9.1, -8.4, -0.2, "TMC", "TMC", "Gobindapur"], ["227+227A", 232, 82.7, 15.0, 0.8, 785, 142, 8, 949, 77.1, 20.8, 0.4, 745, 201, 4, 966, -5.6, 5.8, -0.4, "TMC", "TMC", "Aminabad SK. Para"], ["148", 151, 65.2, 30.3, 1.4, 525, 244, 11, 805, 76.7, 21.7, 0.4, 630, 178, 3, 821, 11.5, -8.6, -1.0, "TMC", "TMC", "Sekahalipara"], ["259+259A", 264, 63.9, 32.6, 1.1, 678, 346, 12, 1061, 75.8, 20.1, 1.4, 745, 198, 14, 983, 11.9, -12.5, 0.3, "TMC", "TMC", "Mominpur"], ["266", 271, 96.0, 2.9, 0.0, 427, 13, 0, 445, 75.3, 17.0, 0.8, 293, 66, 3, 389, -20.6, 14.0, 0.8, "TMC", "TMC", "Nischintapur"], ["194+194A", 199, 62.6, 35.7, 0.4, 603, 344, 4, 963, 73.3, 25.9, 0.1, 740, 262, 1, 1010, 10.7, -9.8, -0.3, "TMC", "TMC", "Harurpara"]], "weak": [["120", 122, 20.1, 7.5, 68.5, 142, 53, 483, 705, 6.9, 25.0, 65.1, 46, 167, 435, 668, -13.3, 17.5, -3.4, "BJP", "BJP", "Madhurkul"], ["81", 82, 20.5, 22.5, 54.0, 166, 182, 436, 808, 8.2, 32.7, 56.9, 67, 266, 463, 813, -12.3, 10.2, 3.0, "BJP", "BJP", "Jitpur"], ["79", 80, 33.6, 10.0, 54.5, 212, 63, 344, 631, 12.0, 27.0, 59.0, 75, 169, 369, 625, -21.6, 17.1, 4.5, "BJP", "BJP", "Jitpur"], ["80+80A", 81, 17.7, 38.3, 42.2, 154, 334, 368, 872, 13.4, 38.9, 46.5, 120, 348, 416, 895, -4.3, 0.6, 4.3, "BJP", "BJP", "Jitpur"], ["92", 93, 33.5, 18.9, 44.5, 258, 146, 343, 771, 16.6, 28.2, 54.0, 130, 221, 423, 784, -16.9, 9.3, 9.5, "BJP", "BJP", "Dakshin Jitpur"], ["49", 50, 38.5, 30.1, 29.2, 277, 217, 210, 720, 18.6, 48.3, 30.6, 232, 604, 382, 1250, -19.9, 18.2, 1.4, "TMC", "CPM", "Bhagirathpur"], ["86", 87, 39.3, 57.1, 1.8, 153, 222, 7, 389, 21.3, 76.1, 0.5, 83, 296, 2, 389, -18.0, 19.0, -1.3, "CPM", "CPM", "Purbo Pardiar"], ["17", 17, 26.1, 19.7, 52.2, 205, 155, 410, 786, 22.8, 20.0, 55.2, 192, 168, 465, 842, -3.3, 0.2, 3.1, "BJP", "BJP", "Domkal Kuthi"], ["89", 90, 30.7, 58.7, 7.9, 124, 237, 32, 404, 23.4, 65.5, 7.6, 86, 241, 28, 368, -7.3, 6.8, -0.3, "CPM", "CPM", "Pardiar"], ["54", 55, 52.6, 43.7, 1.7, 284, 236, 9, 540, 24.1, 72.7, 1.1, 135, 407, 6, 560, -28.5, 29.0, -0.6, "TMC", "CPM", "Fatepur"], ["62", 63, 21.0, 28.2, 47.9, 177, 237, 403, 841, 24.7, 21.6, 51.5, 217, 190, 453, 880, 3.6, -6.6, 3.6, "BJP", "BJP", "Kumarpur"], ["52+52A", 53, 38.0, 21.6, 38.0, 350, 199, 350, 920, 24.7, 35.2, 37.1, 225, 321, 338, 912, -13.4, 13.6, -1.0, "TMC", "BJP", "Bhagirathpur"], ["48", 48, 18.9, 19.1, 59.7, 104, 105, 328, 549, 26.7, 69.3, 1.1, 172, 446, 7, 644, 7.8, 50.1, -58.7, "BJP", "CPM", "Batikamari"], ["51", 52, 44.5, 36.8, 14.3, 340, 281, 109, 764, 27.0, 50.9, 12.2, 214, 403, 97, 792, -17.5, 14.1, -2.0, "TMC", "CPM", "Bhagirathpur"], ["90", 91, 47.2, 47.6, 2.2, 231, 233, 11, 489, 27.2, 68.5, 2.0, 120, 302, 9, 441, -20.0, 20.8, -0.2, "CPM", "CPM", "Paschim Pardiar"]], "tmc_cpm": [["271", 276, 83.0, 12.3, 1.3, 567, 84, 9, 683, 40.8, 56.4, 0.6, 279, 385, 4, 683, -42.2, 44.1, -0.7, "TMC", "CPM", "Kamurdiar"], ["214", 219, 73.7, 24.4, 0.8, 569, 188, 6, 772, 34.4, 59.4, 0.4, 246, 425, 3, 715, -39.3, 35.1, -0.4, "TMC", "CPM", "Narojpur"], ["91", 92, 69.5, 28.3, 1.0, 471, 192, 7, 678, 33.2, 64.5, 0.7, 203, 394, 4, 611, -36.2, 36.2, -0.4, "TMC", "CPM", "Paschim Pardiar"], ["205", 210, 85.3, 12.5, 2.1, 561, 82, 14, 658, 47.5, 46.5, 2.3, 308, 301, 15, 648, -37.7, 34.0, 0.2, "TMC", "TMC", "Nowdapara"], ["267+267A", 272, 92.7, 5.3, 0.5, 931, 53, 5, 1004, 59.2, 36.4, 0.8, 551, 339, 7, 931, -33.5, 31.1, 0.3, "TMC", "TMC", "Nischintapur"], ["274", 279, 82.0, 13.8, 1.5, 701, 118, 13, 855, 49.9, 45.1, 1.0, 407, 368, 8, 816, -32.1, 31.3, -0.5, "TMC", "TMC", "Kamurdiar"], ["236+236A", 241, 72.1, 22.7, 1.2, 782, 246, 13, 1084, 42.3, 52.8, 1.7, 442, 552, 18, 1046, -29.9, 30.1, 0.5, "TMC", "CPM", "Kuchimora"], ["217", 222, 69.5, 26.7, 1.5, 560, 215, 12, 806, 40.3, 57.3, 0.7, 327, 465, 6, 812, -29.2, 30.6, -0.7, "TMC", "CPM", "Katakopra"], ["75", 76, 70.7, 27.2, 0.8, 424, 163, 5, 600, 41.0, 56.4, 1.0, 215, 296, 5, 525, -29.7, 29.2, 0.1, "TMC", "CPM", "Madhya Goribpur"], ["13", 13, 59.8, 32.0, 2.3, 291, 156, 11, 487, 32.7, 63.3, 1.2, 164, 318, 6, 502, -27.1, 31.3, -1.1, "TMC", "CPM", "Ramna Satberia"], ["280+280A", 285, 81.9, 12.7, 1.2, 880, 136, 13, 1074, 53.2, 42.0, 0.8, 572, 451, 9, 1075, -28.7, 29.3, -0.4, "TMC", "TMC", "Boxipur"], ["54", 55, 52.6, 43.7, 1.7, 284, 236, 9, 540, 24.1, 72.7, 1.1, 135, 407, 6, 560, -28.5, 29.0, -0.6, "TMC", "CPM", "Fatepur"], ["235", 240, 73.0, 24.4, 0.9, 499, 167, 6, 684, 43.2, 51.8, 2.3, 295, 354, 16, 683, -29.8, 27.4, 1.5, "TMC", "CPM", "Kuchimora"], ["268+268A", 273, 84.3, 13.8, 1.0, 961, 157, 11, 1140, 55.8, 42.2, 0.8, 595, 450, 9, 1067, -28.5, 28.4, -0.1, "TMC", "TMC", "Mominpur"], ["201", 206, 68.8, 29.2, 0.5, 379, 161, 3, 551, 40.5, 57.2, 0.7, 235, 332, 4, 580, -28.3, 28.0, 0.1, "TMC", "CPM", "Alinagar"]], "cpm_tmc": [["142", 145, 37.7, 55.3, 1.4, 236, 346, 9, 626, 70.7, 26.7, 0.8, 448, 169, 5, 634, 33.0, -28.6, -0.6, "CPM", "TMC", "Dakshinnagar"], ["34", 34, 7.0, 91.1, 0.8, 43, 563, 5, 618, 32.7, 60.8, 1.7, 229, 426, 12, 701, 25.7, -30.3, 0.9, "CPM", "CPM", "Sahabajpur Mohonerpara"], ["143", 146, 41.2, 50.9, 5.9, 250, 309, 36, 607, 66.9, 26.9, 3.3, 432, 174, 21, 646, 25.7, -24.0, -2.7, "CPM", "TMC", "Mamudpur"], ["260+260A", 265, 36.1, 43.4, 18.2, 375, 451, 189, 1038, 64.1, 22.8, 10.2, 644, 229, 103, 1005, 28.0, -20.7, -8.0, "CPM", "TMC", "Harurpara"], ["134", 136, 41.5, 52.5, 2.7, 261, 330, 17, 629, 65.5, 30.0, 1.0, 400, 183, 6, 611, 24.0, -22.5, -1.7, "CPM", "TMC", "Juginda Malithapara"], ["33", 33, 25.3, 69.7, 1.3, 151, 416, 8, 597, 42.9, 50.1, 2.2, 257, 300, 13, 599, 17.6, -19.6, 0.8, "CPM", "CPM", "Sahabajpur Mohonerpara"], ["140", 143, 61.3, 33.2, 1.5, 482, 261, 12, 786, 81.4, 16.4, 0.9, 617, 124, 7, 758, 20.1, -16.8, -0.6, "TMC", "TMC", "Dakshinnagar"], ["146", 149, 53.0, 44.9, 0.3, 495, 419, 3, 934, 70.5, 27.3, 0.4, 666, 258, 4, 945, 17.5, -17.6, 0.1, "TMC", "TMC", "Uttar Gobindapur"], ["220", 225, 29.3, 65.6, 0.8, 153, 343, 4, 523, 46.2, 48.6, 1.6, 234, 246, 8, 506, 17.0, -17.0, 0.8, "CPM", "CPM", "Kupila"], ["168", 172, 32.0, 25.3, 39.8, 244, 193, 303, 762, 51.1, 15.7, 31.2, 409, 126, 250, 801, 19.0, -9.6, -8.6, "BJP", "TMC", "Bhatsala"], ["255", 260, 71.6, 26.4, 0.6, 474, 175, 4, 662, 84.8, 12.0, 1.2, 543, 77, 8, 640, 13.2, -14.4, 0.6, "TMC", "TMC", "Baisnabpara"], ["149+149A", 152, 53.4, 41.0, 1.5, 661, 507, 18, 1237, 68.3, 28.6, 0.9, 865, 362, 12, 1267, 14.8, -12.4, -0.5, "TMC", "TMC", "Sekahalipara"], ["145", 148, 72.9, 21.7, 3.7, 434, 129, 22, 595, 86.8, 9.3, 3.2, 541, 58, 20, 623, 13.9, -12.4, -0.5, "TMC", "TMC", "Uttar Gobindapur"], ["166", 170, 72.2, 26.3, 0.7, 332, 121, 3, 460, 84.7, 13.7, 0.4, 427, 69, 2, 504, 12.5, -12.6, -0.3, "TMC", "TMC", "Ramna Basantapur"], ["259+259A", 264, 63.9, 32.6, 1.1, 678, 346, 12, 1061, 75.8, 20.1, 1.4, 745, 198, 14, 983, 11.9, -12.5, 0.3, "TMC", "TMC", "Mominpur"]], "bjp_cpm": [["48", 48, 18.9, 19.1, 59.7, 104, 105, 328, 549, 26.7, 69.3, 1.1, 172, 446, 7, 644, 7.8, 50.1, -58.7, "BJP", "CPM", "Batikamari"], ["271", 276, 83.0, 12.3, 1.3, 567, 84, 9, 683, 40.8, 56.4, 0.6, 279, 385, 4, 683, -42.2, 44.1, -0.7, "TMC", "CPM", "Kamurdiar"], ["91", 92, 69.5, 28.3, 1.0, 471, 192, 7, 678, 33.2, 64.5, 0.7, 203, 394, 4, 611, -36.2, 36.2, -0.4, "TMC", "CPM", "Paschim Pardiar"], ["214", 219, 73.7, 24.4, 0.8, 569, 188, 6, 772, 34.4, 59.4, 0.4, 246, 425, 3, 715, -39.3, 35.1, -0.4, "TMC", "CPM", "Narojpur"], ["205", 210, 85.3, 12.5, 2.1, 561, 82, 14, 658, 47.5, 46.5, 2.3, 308, 301, 15, 648, -37.7, 34.0, 0.2, "TMC", "TMC", "Nowdapara"], ["13", 13, 59.8, 32.0, 2.3, 291, 156, 11, 487, 32.7, 63.3, 1.2, 164, 318, 6, 502, -27.1, 31.3, -1.1, "TMC", "CPM", "Ramna Satberia"], ["274", 279, 82.0, 13.8, 1.5, 701, 118, 13, 855, 49.9, 45.1, 1.0, 407, 368, 8, 816, -32.1, 31.3, -0.5, "TMC", "TMC", "Kamurdiar"], ["217", 222, 69.5, 26.7, 1.5, 560, 215, 12, 806, 40.3, 57.3, 0.7, 327, 465, 6, 812, -29.2, 30.6, -0.7, "TMC", "CPM", "Katakopra"], ["267+267A", 272, 92.7, 5.3, 0.5, 931, 53, 5, 1004, 59.2, 36.4, 0.8, 551, 339, 7, 931, -33.5, 31.1, 0.3, "TMC", "TMC", "Nischintapur"], ["280+280A", 285, 81.9, 12.7, 1.2, 880, 136, 13, 1074, 53.2, 42.0, 0.8, 572, 451, 9, 1075, -28.7, 29.3, -0.4, "TMC", "TMC", "Boxipur"], ["54", 55, 52.6, 43.7, 1.7, 284, 236, 9, 540, 24.1, 72.7, 1.1, 135, 407, 6, 560, -28.5, 29.0, -0.6, "TMC", "CPM", "Fatepur"], ["236+236A", 241, 72.1, 22.7, 1.2, 782, 246, 13, 1084, 42.3, 52.8, 1.7, 442, 552, 18, 1046, -29.9, 30.1, 0.5, "TMC", "CPM", "Kuchimora"], ["270", 275, 89.4, 7.3, 1.3, 623, 51, 9, 697, 62.2, 35.8, 0.6, 436, 251, 4, 701, -27.2, 28.5, -0.7, "TMC", "TMC", "Kamurdiar"], ["75", 76, 70.7, 27.2, 0.8, 424, 163, 5, 600, 41.0, 56.4, 1.0, 215, 296, 5, 525, -29.7, 29.2, 0.1, "TMC", "CPM", "Madhya Goribpur"], ["268+268A", 273, 84.3, 13.8, 1.0, 961, 157, 11, 1140, 55.8, 42.2, 0.8, 595, 450, 9, 1067, -28.5, 28.4, -0.1, "TMC", "TMC", "Mominpur"]], "cpm_bjp": [["34", 34, 7.0, 91.1, 0.8, 43, 563, 5, 618, 32.7, 60.8, 1.7, 229, 426, 12, 701, 25.7, -30.3, 0.9, "CPM", "CPM", "Sahabajpur Mohonerpara"], ["142", 145, 37.7, 55.3, 1.4, 236, 346, 9, 626, 70.7, 26.7, 0.8, 448, 169, 5, 634, 33.0, -28.6, -0.6, "CPM", "TMC", "Dakshinnagar"], ["256", 261, 48.7, 40.5, 8.1, 361, 300, 60, 741, 48.4, 27.8, 22.2, 328, 188, 150, 677, -0.3, -12.7, 14.1, "TMC", "TMC", "Baisnabpara"], ["143", 146, 41.2, 50.9, 5.9, 250, 309, 36, 607, 66.9, 26.9, 3.3, 432, 174, 21, 646, 25.7, -24.0, -2.7, "CPM", "TMC", "Mamudpur"], ["134", 136, 41.5, 52.5, 2.7, 261, 330, 17, 629, 65.5, 30.0, 1.0, 400, 183, 6, 611, 24.0, -22.5, -1.7, "CPM", "TMC", "Juginda Malithapara"], ["33", 33, 25.3, 69.7, 1.3, 151, 416, 8, 597, 42.9, 50.1, 2.2, 257, 300, 13, 599, 17.6, -19.6, 0.8, "CPM", "CPM", "Sahabajpur Mohonerpara"], ["220", 225, 29.3, 65.6, 0.8, 153, 343, 4, 523, 46.2, 48.6, 1.6, 234, 246, 8, 506, 17.0, -17.0, 0.8, "CPM", "CPM", "Kupila"], ["146", 149, 53.0, 44.9, 0.3, 495, 419, 3, 934, 70.5, 27.3, 0.4, 666, 258, 4, 945, 17.5, -17.6, 0.1, "TMC", "TMC", "Uttar Gobindapur"], ["140", 143, 61.3, 33.2, 1.5, 482, 261, 12, 786, 81.4, 16.4, 0.9, 617, 124, 7, 758, 20.1, -16.8, -0.6, "TMC", "TMC", "Dakshinnagar"], ["255", 260, 71.6, 26.4, 0.6, 474, 175, 4, 662, 84.8, 12.0, 1.2, 543, 77, 8, 640, 13.2, -14.4, 0.6, "TMC", "TMC", "Baisnabpara"], ["159", 163, 29.8, 41.9, 26.1, 175, 246, 153, 587, 32.4, 34.3, 32.3, 212, 224, 211, 654, 2.6, -7.7, 6.2, "CPM", "CPM", "Domkal"], ["259+259A", 264, 63.9, 32.6, 1.1, 678, 346, 12, 1061, 75.8, 20.1, 1.4, 745, 198, 14, 983, 11.9, -12.5, 0.3, "TMC", "TMC", "Mominpur"], ["260+260A", 265, 36.1, 43.4, 18.2, 375, 451, 189, 1038, 64.1, 22.8, 10.2, 644, 229, 103, 1005, 28.0, -20.7, -8.0, "CPM", "TMC", "Harurpara"], ["35", 35, 31.5, 64.1, 0.8, 252, 513, 6, 800, 38.7, 51.9, 1.2, 282, 378, 9, 728, 7.2, -12.2, 0.5, "CPM", "CPM", "Sahabajpur"], ["166", 170, 72.2, 26.3, 0.7, 332, 121, 3, 460, 84.7, 13.7, 0.4, 427, 69, 2, 504, 12.5, -12.6, -0.3, "TMC", "TMC", "Ramna Basantapur"]], "recovery": [["271", 276, 83.0, 12.3, 1.3, 567, 84, 9, 683, 40.8, 56.4, 0.6, 279, 385, 4, 683, -42.2, 44.1, -0.7, "TMC", "CPM", "Kamurdiar"], ["214", 219, 73.7, 24.4, 0.8, 569, 188, 6, 772, 34.4, 59.4, 0.4, 246, 425, 3, 715, -39.3, 35.1, -0.4, "TMC", "CPM", "Narojpur"], ["91", 92, 69.5, 28.3, 1.0, 471, 192, 7, 678, 33.2, 64.5, 0.7, 203, 394, 4, 611, -36.2, 36.2, -0.4, "TMC", "CPM", "Paschim Pardiar"], ["236+236A", 241, 72.1, 22.7, 1.2, 782, 246, 13, 1084, 42.3, 52.8, 1.7, 442, 552, 18, 1046, -29.9, 30.1, 0.5, "TMC", "CPM", "Kuchimora"], ["217", 222, 69.5, 26.7, 1.5, 560, 215, 12, 806, 40.3, 57.3, 0.7, 327, 465, 6, 812, -29.2, 30.6, -0.7, "TMC", "CPM", "Katakopra"], ["75", 76, 70.7, 27.2, 0.8, 424, 163, 5, 600, 41.0, 56.4, 1.0, 215, 296, 5, 525, -29.7, 29.2, 0.1, "TMC", "CPM", "Madhya Goribpur"], ["13", 13, 59.8, 32.0, 2.3, 291, 156, 11, 487, 32.7, 63.3, 1.2, 164, 318, 6, 502, -27.1, 31.3, -1.1, "TMC", "CPM", "Ramna Satberia"], ["54", 55, 52.6, 43.7, 1.7, 284, 236, 9, 540, 24.1, 72.7, 1.1, 135, 407, 6, 560, -28.5, 29.0, -0.6, "TMC", "CPM", "Fatepur"], ["235", 240, 73.0, 24.4, 0.9, 499, 167, 6, 684, 43.2, 51.8, 2.3, 295, 354, 16, 683, -29.8, 27.4, 1.5, "TMC", "CPM", "Kuchimora"], ["201", 206, 68.8, 29.2, 0.5, 379, 161, 3, 551, 40.5, 57.2, 0.7, 235, 332, 4, 580, -28.3, 28.0, 0.1, "TMC", "CPM", "Alinagar"], ["102+102A", 103, 57.7, 40.2, 0.9, 657, 458, 10, 1138, 30.1, 67.3, 0.7, 339, 759, 8, 1128, -27.7, 27.0, -0.2, "TMC", "CPM", "Kusaberia"], ["100", 101, 55.9, 39.3, 0.8, 503, 354, 7, 900, 28.6, 66.6, 0.8, 238, 554, 7, 832, -27.3, 27.3, 0.1, "TMC", "CPM", "Kusaberia"], ["261", 266, 67.0, 27.4, 4.3, 313, 128, 20, 467, 37.9, 52.0, 7.6, 170, 233, 34, 448, -29.1, 24.6, 3.3, "TMC", "CPM", "Harurpara"], ["106+106A", 107, 62.1, 34.0, 1.9, 687, 376, 21, 1107, 36.0, 60.1, 1.3, 381, 636, 14, 1059, -26.1, 26.1, -0.6, "TMC", "CPM", "Pirojpur"], ["101", 102, 71.0, 24.9, 1.2, 607, 213, 10, 855, 47.1, 49.7, 1.4, 376, 397, 11, 798, -23.9, 24.8, 0.2, "TMC", "CPM", "Kusaberia"], ["231", 236, 64.8, 31.3, 0.8, 472, 228, 6, 728, 40.6, 54.6, 1.2, 307, 413, 9, 757, -24.3, 23.2, 0.4, "TMC", "CPM", "Sahadiar"], ["119", 121, 62.6, 32.0, 2.4, 393, 201, 15, 628, 38.1, 54.4, 1.7, 225, 321, 10, 590, -24.4, 22.4, -0.7, "TMC", "CPM", "Madhurkul"], ["23+23A", 23, 59.4, 36.8, 1.2, 627, 389, 13, 1056, 35.4, 59.4, 1.4, 363, 609, 14, 1025, -24.0, 22.6, 0.1, "TMC", "CPM", "Kala Beria"], ["230+230A", 235, 51.4, 44.4, 1.1, 583, 503, 13, 1134, 30.2, 66.0, 1.3, 358, 783, 16, 1186, -21.2, 21.7, 0.2, "TMC", "CPM", "Sahadiar"], ["118", 120, 68.2, 27.6, 2.0, 272, 110, 8, 399, 47.6, 49.7, 2.1, 204, 213, 9, 429, -20.6, 22.1, 0.1, "TMC", "CPM", "Bagdanga"]], "bjp_booths": [["120", 122, 20.1, 7.5, 68.5, 142, 53, 483, 705, 6.9, 25.0, 65.1, 46, 167, 435, 668, -13.3, 17.5, -3.4, "BJP", "BJP", "Madhurkul"], ["79", 80, 33.6, 10.0, 54.5, 212, 63, 344, 631, 12.0, 27.0, 59.0, 75, 169, 369, 625, -21.6, 17.1, 4.5, "BJP", "BJP", "Jitpur"], ["11+11A", 11, 33.9, 11.6, 52.7, 301, 103, 468, 888, 27.3, 12.3, 59.0, 267, 120, 577, 978, -6.6, 0.7, 6.3, "BJP", "BJP", "Laxminathpur"], ["81", 82, 20.5, 22.5, 54.0, 166, 182, 436, 808, 8.2, 32.7, 56.9, 67, 266, 463, 813, -12.3, 10.2, 3.0, "BJP", "BJP", "Jitpur"], ["17", 17, 26.1, 19.7, 52.2, 205, 155, 410, 786, 22.8, 20.0, 55.2, 192, 168, 465, 842, -3.3, 0.2, 3.1, "BJP", "BJP", "Domkal Kuthi"], ["92", 93, 33.5, 18.9, 44.5, 258, 146, 343, 771, 16.6, 28.2, 54.0, 130, 221, 423, 784, -16.9, 9.3, 9.5, "BJP", "BJP", "Dakshin Jitpur"], ["62", 63, 21.0, 28.2, 47.9, 177, 237, 403, 841, 24.7, 21.6, 51.5, 217, 190, 453, 880, 3.6, -6.6, 3.6, "BJP", "BJP", "Kumarpur"], ["80+80A", 81, 17.7, 38.3, 42.2, 154, 334, 368, 872, 13.4, 38.9, 46.5, 120, 348, 416, 895, -4.3, 0.6, 4.3, "BJP", "BJP", "Jitpur"], ["29", 29, 37.3, 27.5, 31.4, 227, 167, 191, 608, 29.5, 27.6, 40.2, 173, 162, 236, 587, -7.9, 0.1, 8.8, "TMC", "BJP", "Panchananpur"], ["20", 20, 30.0, 31.3, 35.2, 162, 169, 190, 540, 34.4, 24.0, 38.4, 192, 134, 214, 558, 4.4, -7.3, 3.2, "BJP", "BJP", "Bajitpur"], ["52+52A", 53, 38.0, 21.6, 38.0, 350, 199, 350, 920, 24.7, 35.2, 37.1, 225, 321, 338, 912, -13.4, 13.6, -1.0, "TMC", "BJP", "Bhagirathpur"]], "reversals": [["271", 276, 83.0, 12.3, 1.3, 567, 84, 9, 683, 40.8, 56.4, 0.6, 279, 385, 4, 683, -42.2, 44.1, -0.7, "TMC", "CPM", "Kamurdiar"], ["214", 219, 73.7, 24.4, 0.8, 569, 188, 6, 772, 34.4, 59.4, 0.4, 246, 425, 3, 715, -39.3, 35.1, -0.4, "TMC", "CPM", "Narojpur"], ["91", 92, 69.5, 28.3, 1.0, 471, 192, 7, 678, 33.2, 64.5, 0.7, 203, 394, 4, 611, -36.2, 36.2, -0.4, "TMC", "CPM", "Paschim Pardiar"], ["236+236A", 241, 72.1, 22.7, 1.2, 782, 246, 13, 1084, 42.3, 52.8, 1.7, 442, 552, 18, 1046, -29.9, 30.1, 0.5, "TMC", "CPM", "Kuchimora"], ["235", 240, 73.0, 24.4, 0.9, 499, 167, 6, 684, 43.2, 51.8, 2.3, 295, 354, 16, 683, -29.8, 27.4, 1.5, "TMC", "CPM", "Kuchimora"], ["75", 76, 70.7, 27.2, 0.8, 424, 163, 5, 600, 41.0, 56.4, 1.0, 215, 296, 5, 525, -29.7, 29.2, 0.1, "TMC", "CPM", "Madhya Goribpur"], ["217", 222, 69.5, 26.7, 1.5, 560, 215, 12, 806, 40.3, 57.3, 0.7, 327, 465, 6, 812, -29.2, 30.6, -0.7, "TMC", "CPM", "Katakopra"], ["261", 266, 67.0, 27.4, 4.3, 313, 128, 20, 467, 37.9, 52.0, 7.6, 170, 233, 34, 448, -29.1, 24.6, 3.3, "TMC", "CPM", "Harurpara"], ["54", 55, 52.6, 43.7, 1.7, 284, 236, 9, 540, 24.1, 72.7, 1.1, 135, 407, 6, 560, -28.5, 29.0, -0.6, "TMC", "CPM", "Fatepur"], ["201", 206, 68.8, 29.2, 0.5, 379, 161, 3, 551, 40.5, 57.2, 0.7, 235, 332, 4, 580, -28.3, 28.0, 0.1, "TMC", "CPM", "Alinagar"], ["102+102A", 103, 57.7, 40.2, 0.9, 657, 458, 10, 1138, 30.1, 67.3, 0.7, 339, 759, 8, 1128, -27.7, 27.0, -0.2, "TMC", "CPM", "Kusaberia"], ["100", 101, 55.9, 39.3, 0.8, 503, 354, 7, 900, 28.6, 66.6, 0.8, 238, 554, 7, 832, -27.3, 27.3, 0.1, "TMC", "CPM", "Kusaberia"], ["13", 13, 59.8, 32.0, 2.3, 291, 156, 11, 487, 32.7, 63.3, 1.2, 164, 318, 6, 502, -27.1, 31.3, -1.1, "TMC", "CPM", "Ramna Satberia"], ["106+106A", 107, 62.1, 34.0, 1.9, 687, 376, 21, 1107, 36.0, 60.1, 1.3, 381, 636, 14, 1059, -26.1, 26.1, -0.6, "TMC", "CPM", "Pirojpur"], ["119", 121, 62.6, 32.0, 2.4, 393, 201, 15, 628, 38.1, 54.4, 1.7, 225, 321, 10, 590, -24.4, 22.4, -0.7, "TMC", "CPM", "Madhurkul"], ["231", 236, 64.8, 31.3, 0.8, 472, 228, 6, 728, 40.6, 54.6, 1.2, 307, 413, 9, 757, -24.3, 23.2, 0.4, "TMC", "CPM", "Sahadiar"], ["23+23A", 23, 59.4, 36.8, 1.2, 627, 389, 13, 1056, 35.4, 59.4, 1.4, 363, 609, 14, 1025, -24.0, 22.6, 0.1, "TMC", "CPM", "Kala Beria"], ["101", 102, 71.0, 24.9, 1.2, 607, 213, 10, 855, 47.1, 49.7, 1.4, 376, 397, 11, 798, -23.9, 24.8, 0.2, "TMC", "CPM", "Kusaberia"], ["241", 246, 63.4, 29.2, 5.6, 430, 198, 38, 678, 40.8, 49.2, 7.5, 273, 329, 50, 669, -22.6, 20.0, 1.9, "TMC", "CPM", "Mohonpur"], ["64", 65, 56.2, 41.0, 1.1, 351, 256, 7, 624, 34.2, 59.8, 0.6, 214, 374, 4, 625, -22.0, 18.8, -0.5, "TMC", "CPM", "Shibnagar"], ["104+104A", 105, 58.1, 36.8, 2.4, 595, 377, 25, 1024, 36.6, 57.1, 2.9, 365, 569, 29, 996, -21.5, 20.3, 0.5, "TMC", "CPM", "Kalyanpur"], ["230+230A", 235, 51.4, 44.4, 1.1, 583, 503, 13, 1134, 30.2, 66.0, 1.3, 358, 783, 16, 1186, -21.2, 21.7, 0.2, "TMC", "CPM", "Sahadiar"], ["118", 120, 68.2, 27.6, 2.0, 272, 110, 8, 399, 47.6, 49.7, 2.1, 204, 213, 9, 429, -20.6, 22.1, 0.1, "TMC", "CPM", "Bagdanga"], ["41", 41, 63.1, 34.0, 1.5, 382, 206, 9, 605, 43.0, 52.7, 2.0, 257, 315, 12, 598, -20.2, 18.6, 0.5, "TMC", "CPM", "Garaberia"], ["53", 54, 61.0, 35.4, 0.9, 455, 264, 7, 746, 40.9, 56.6, 1.2, 307, 425, 9, 751, -20.1, 21.2, 0.3, "TMC", "CPM", "Fatepur"], ["49", 50, 38.5, 30.1, 29.2, 277, 217, 210, 720, 18.6, 48.3, 30.6, 232, 604, 382, 1250, -19.9, 18.2, 1.4, "TMC", "CPM", "Bhagirathpur"], ["215+215A", 220, 64.4, 33.3, 0.8, 686, 355, 8, 1066, 44.7, 48.1, 1.0, 440, 474, 10, 985, -19.7, 14.8, 0.3, "TMC", "CPM", "Narojpur"], ["40", 40, 56.9, 39.4, 0.7, 432, 299, 5, 759, 37.5, 52.4, 0.3, 274, 383, 2, 731, -19.4, 13.0, -0.4, "TMC", "CPM", "Garaberia"], ["55", 56, 55.6, 42.6, 0.2, 281, 215, 1, 505, 36.9, 60.8, 0.6, 191, 315, 3, 518, -18.8, 18.2, 0.4, "TMC", "CPM", "Fatepur"], ["50+50A", 51, 46.0, 24.4, 27.2, 515, 273, 305, 1120, 27.2, 41.2, 27.9, 300, 454, 307, 1102, -18.8, 16.8, 0.6, "TMC", "CPM", "Bhagirathpur"], ["211", 216, 57.2, 39.6, 1.0, 397, 275, 7, 694, 38.9, 58.4, 0.9, 257, 386, 6, 661, -18.3, 18.8, -0.1, "TMC", "CPM", "Raipur"], ["200+200A", 205, 55.4, 42.3, 1.1, 680, 519, 14, 1227, 37.5, 59.0, 0.9, 456, 717, 11, 1216, -17.9, 16.7, -0.2, "TMC", "CPM", "Bilaspur"], ["204", 209, 57.8, 39.9, 0.4, 442, 305, 3, 765, 40.3, 56.7, 0.4, 280, 394, 3, 695, -17.5, 16.8, 0.0, "TMC", "CPM", "Alinagar"], ["51", 52, 44.5, 36.8, 14.3, 340, 281, 109, 764, 27.0, 50.9, 12.2, 214, 403, 97, 792, -17.5, 14.1, -2.0, "TMC", "CPM", "Bhagirathpur"], ["212+212A", 217, 59.8, 36.3, 1.6, 604, 367, 16, 1010, 43.2, 54.5, 0.8, 424, 535, 8, 981, -16.6, 18.2, -0.8, "TMC", "CPM", "Muktarpur"], ["103", 104, 50.8, 43.4, 3.6, 392, 335, 28, 772, 34.5, 60.4, 3.0, 252, 441, 22, 730, -16.3, 17.0, -0.6, "TMC", "CPM", "Kusaberia"], ["68", 69, 56.4, 39.2, 2.0, 432, 300, 15, 766, 41.0, 55.5, 0.5, 309, 418, 4, 753, -15.4, 16.3, -1.4, "TMC", "CPM", "Shibnagar"], ["76+76A", 77, 61.5, 34.3, 1.4, 640, 357, 15, 1041, 46.7, 49.7, 0.9, 463, 493, 9, 992, -14.8, 15.4, -0.5, "TMC", "CPM", "Dakhin Garibpur Acharyapara"], ["96", 97, 49.0, 47.2, 2.3, 421, 406, 20, 860, 34.9, 57.0, 6.2, 277, 452, 49, 793, -14.0, 9.8, 3.9, "TMC", "CPM", "Dobapara"], ["97", 98, 53.8, 44.6, 0.7, 410, 340, 5, 762, 39.8, 56.8, 0.9, 305, 435, 7, 766, -14.0, 12.2, 0.3, "TMC", "CPM", "Juranpur"], ["177", 181, 58.6, 36.8, 1.9, 282, 177, 9, 481, 45.5, 53.0, 0.2, 218, 254, 1, 479, -13.1, 16.2, -1.7, "TMC", "CPM", "Siropara"], ["83", 84, 50.7, 45.0, 1.2, 446, 396, 11, 880, 37.9, 59.1, 1.0, 297, 463, 8, 784, -12.8, 14.1, -0.2, "TMC", "CPM", "Dakhin Chandpur"], ["152", 156, 49.5, 45.1, 1.8, 324, 295, 12, 654, 36.8, 59.5, 0.7, 247, 400, 5, 672, -12.8, 14.4, -1.1, "TMC", "CPM", "Manik nagar"], ["206+206A", 211, 54.1, 42.3, 1.6, 615, 481, 18, 1137, 41.4, 54.8, 0.9, 464, 615, 10, 1122, -12.7, 12.5, -0.7, "TMC", "CPM", "Dumurtala"], ["56", 57, 58.4, 37.1, 2.2, 497, 316, 19, 851, 45.7, 51.9, 0.9, 390, 443, 8, 853, -12.7, 14.8, -1.3, "TMC", "CPM", "Fatepur Nowdapara"], ["98+98A", 99, 53.5, 43.1, 1.6, 517, 417, 15, 967, 41.5, 55.1, 2.1, 378, 502, 19, 911, -12.0, 12.0, 0.5, "TMC", "CPM", "Juranpur"], ["156+156A", 160, 46.5, 33.4, 17.2, 433, 311, 160, 931, 34.9, 44.0, 18.7, 349, 440, 187, 1000, -11.6, 10.6, 1.5, "TMC", "CPM", "Domkal"], ["239", 244, 55.8, 37.9, 3.7, 361, 245, 24, 647, 44.7, 47.0, 7.0, 293, 308, 46, 655, -11.1, 9.2, 3.3, "TMC", "CPM", "Shrikrishnapur"], ["249", 254, 50.4, 31.0, 16.9, 363, 223, 122, 720, 39.5, 45.2, 13.1, 295, 338, 98, 747, -10.9, 14.3, -3.8, "TMC", "CPM", "Rajapur"], ["105+105A", 106, 50.5, 41.8, 4.7, 479, 396, 45, 948, 39.8, 54.9, 4.2, 357, 493, 38, 898, -10.8, 13.1, -0.5, "TMC", "CPM", "Bagalpara"], ["39", 39, 48.9, 35.7, 0.6, 385, 281, 5, 788, 38.5, 53.8, 1.9, 299, 418, 15, 777, -10.4, 18.1, 1.3, "TMC", "CPM", "Sarangpur"], ["121+121A", 123, 43.1, 28.8, 26.1, 459, 306, 278, 1064, 33.0, 34.8, 29.3, 342, 360, 303, 1035, -10.1, 6.0, 3.1, "TMC", "CPM", "Madhurkul"], ["82", 83, 51.8, 45.0, 0.7, 298, 259, 4, 575, 41.9, 56.3, 0.7, 227, 305, 4, 542, -9.9, 11.2, 0.0, "TMC", "CPM", "Dakhin Garibpur"], ["157", 161, 49.2, 44.4, 3.2, 406, 366, 26, 825, 39.5, 55.6, 2.1, 337, 475, 18, 854, -9.8, 11.3, -1.0, "TMC", "CPM", "Kulbona"], ["1", 1, 54.0, 41.7, 1.9, 456, 352, 16, 845, 44.9, 50.1, 1.9, 371, 414, 16, 826, -9.0, 8.5, 0.0, "TMC", "CPM", "Islamtuli Nuddinagar"], ["25", 25, 47.6, 47.6, 1.5, 289, 289, 9, 607, 38.7, 53.6, 0.7, 229, 317, 4, 591, -8.9, 6.0, -0.8, "TMC", "CPM", "Madarpur"], ["26+26A", 26, 50.6, 45.5, 1.5, 553, 497, 16, 1093, 41.9, 49.8, 1.8, 453, 538, 19, 1080, -8.7, 4.3, 0.3, "TMC", "CPM", "Panchananpur"], ["155", 159, 53.5, 42.2, 1.2, 303, 239, 7, 566, 44.9, 52.1, 0.9, 287, 333, 6, 639, -8.6, 9.9, -0.3, "TMC", "CPM", "Domkal"], ["69+69A", 70, 49.2, 46.7, 3.0, 467, 443, 28, 949, 41.0, 53.8, 1.9, 367, 482, 17, 896, -8.2, 7.1, -1.1, "TMC", "CPM", "Shibnagar"], ["71", 72, 55.8, 42.4, 1.0, 344, 261, 6, 616, 48.0, 48.1, 1.0, 283, 284, 6, 590, -7.9, 5.8, 0.0, "TMC", "CPM", "Madhya Goribpur"], ["72", 73, 52.9, 44.1, 1.2, 312, 260, 7, 590, 45.6, 53.1, 0.0, 247, 288, 0, 542, -7.3, 9.1, -1.2, "TMC", "CPM", "Madhya Goribpur"], ["162+162A", 166, 44.8, 35.5, 15.2, 428, 339, 145, 955, 37.6, 43.1, 17.2, 375, 430, 171, 997, -7.2, 7.6, 2.0, "TMC", "CPM", "Domkal"], ["123+123A", 125, 53.2, 42.1, 1.3, 514, 407, 13, 967, 46.7, 50.0, 0.7, 407, 436, 6, 872, -6.5, 7.9, -0.7, "TMC", "CPM", "Ambarpur"], ["189+189A", 194, 47.9, 39.9, 9.4, 431, 359, 85, 900, 44.1, 44.5, 9.3, 417, 421, 88, 946, -3.8, 4.6, -0.1, "TMC", "CPM", "Bablabona"], ["199+199A", 204, 48.6, 48.6, 1.2, 486, 486, 12, 999, 45.4, 51.9, 0.5, 455, 521, 5, 1003, -3.3, 3.3, -0.7, "TMC", "CPM", "Bilaspur"], ["14+14A", 14, 47.8, 41.8, 7.3, 498, 436, 76, 1042, 45.1, 45.2, 6.7, 471, 472, 70, 1044, -2.7, 3.4, -0.6, "TMC", "CPM", "Gangadaspara"]]};
 
-  document.getElementById('stat-ac').textContent=assemblies.length;
-  const totalPhases=assemblies.reduce((a,b)=>a+(b.phases||[]).length,0);
-  document.getElementById('stat-phases').textContent=totalPhases;
-  document.getElementById('stat-inc').textContent=assemblies.reduce((a,b)=>a+(b.total_inclusions||0),0).toLocaleString()||'—';
-  document.getElementById('stat-del').textContent=assemblies.reduce((a,b)=>a+(b.total_deletions||0),0).toLocaleString()||'—';
-  document.getElementById('ac-count').textContent=`${assemblies.length} assembl${assemblies.length===1?'y':'ies'} available`;
+const s = D.s;
+const f1=v=>(v!=null?(+v).toFixed(1):'—');
+const fi=v=>(v!=null?Math.round(+v).toLocaleString():'—');
+const sw=v=>{if(v==null)return'<span class="neu">—</span>';const c=+v>0?'pos':+v<0?'neg':'neu';return`<span class="${c}">${+v>0?'+':''}${f1(v)}</span>`;};
+const wc=w=>w?`<span class="w-${w.toLowerCase()}">${w}</span>`:'';
+function pbar(val,color){return`<div class="bar-track"><div class="bar-fill" style="width:${Math.min(100,val)}%;background:${color}"></div></div>`;}
 
-  if(!assemblies.length){
-    document.getElementById('cards-grid').innerHTML='<div class="empty"><p>No assemblies found in registry.</p></div>';
-    return;
-  }
+// Scorecards
+document.getElementById('scorecards').innerHTML=[
+  {label:'TMC Vote Share',val:`${s['tmc%24']}%`,sub:'2024',delta:`${s['tmc%21']}% in 2021`,cls:'tmc',dn:true},
+  {label:'CPM Vote Share',val:`${s['cpm%24']}%`,sub:'2024',delta:`${s['cpm%21']}% in 2021`,cls:'cpm',dn:false},
+  {label:'BJP Vote Share',val:`${s['bjp%24']}%`,sub:'2024',delta:`${s['bjp%21']}% in 2021`,cls:'bjp',dn:false},
+  {label:'TMC Lead (votes)',val:fi(s.lead24),sub:'over CPM in 2024',delta:`Was ${fi(s.lead21)} in 2021`,cls:'neu',dn:true},
+].map(c=>`<div class="card ${c.cls}"><div class="card-lbl">${c.label}</div><div class="card-val" style="color:${c.cls==='tmc'?'#4ade80':c.cls==='cpm'?'#ff6b6b':c.cls==='bjp'?'#fbbf24':'#f0c040'}">${c.val}</div><div class="card-sub">${c.sub}</div><span class="delta ${c.dn?'dn':'fl'}">${c.delta}</span></div>`).join('');
 
-  document.getElementById('cards-grid').innerHTML=assemblies.map(ac=>{
-    const phases=(ac.phases||[]);
-    const folder=`${ac.ac_no}_${ac.ac_name.replace(/ /g,'_')}`;
-    return`<a class="ac-card" href="assembly.html?ac=${encodeURIComponent(folder)}">
-      <div class="ac-no">AC · ${ac.ac_no}</div>
-      <div class="ac-name">${ac.ac_name}</div>
-      <div class="ac-district">${ac.district||''}</div>
-      <div class="ac-meta">
-        <span class="ac-pill pill-ph">${phases.length} Phase${phases.length!==1?'s':''}</span>
-        ${ac.total_inclusions!=null?`<span class="ac-pill pill-inc">+${(ac.total_inclusions||0).toLocaleString()} Inclusions</span>`:''}
-        ${ac.total_deletions!=null?`<span class="ac-pill pill-del">−${(ac.total_deletions||0).toLocaleString()} Deletions</span>`:''}
-      </div>
-      <div class="ac-footer">
-        <div class="ac-footer-stat">
-          <div class="ac-footer-val" style="color:#4ade80">${(ac.total_inclusions||0).toLocaleString()||'—'}</div>
-          <div class="ac-footer-lbl">Inclusions</div>
-        </div>
-        <div class="ac-footer-stat">
-          <div class="ac-footer-val" style="color:#ff6b6b">${(ac.total_deletions||0).toLocaleString()||'—'}</div>
-          <div class="ac-footer-lbl">Deletions</div>
-        </div>
-        <div class="ac-footer-stat">
-          <div class="ac-footer-val" style="color:var(--accent)">${phases.length}</div>
-          <div class="ac-footer-lbl">Phases</div>
-        </div>
-        <div class="ac-arrow">→</div>
-      </div>
-    </a>`;
-  }).join('');
+// Bars
+document.getElementById('bars').innerHTML=`
+<div class="bar-card"><h3>Vote Share Shift</h3>
+${[['TMC','#4ade80',s['tmc%21'],s['tmc%24']],['CPM','#ff6b6b',s['cpm%21'],s['cpm%24']],['BJP','#fbbf24',s['bjp%21'],s['bjp%24']]].map(([p,c,a,b])=>`<div class="bar-row"><div class="bar-meta"><span class="bar-name" style="color:${c}">${p}</span><span class="bar-val">${a}% → ${b}%</span></div>${pbar(b,c)}</div>`).join('')}</div>
+<div class="bar-card"><h3>Booth Control</h3>
+${[['TMC','#4ade80',s.w21.TMC||0,s.w24.TMC||0],['CPM','#ff6b6b',s.w21.CPM||0,s.w24.CPM||0],['BJP','#fbbf24',s.w21.BJP||0,s.w24.BJP||0]].map(([p,c,a,b])=>`<div class="bar-row"><div class="bar-meta"><span class="bar-name" style="color:${c}">${p}-led booths</span><span class="bar-val">${a} → ${b}</span></div>${pbar(b/280*100,c)}</div>`).join('')}</div>`;
+
+// Distribution
+const dk=['<30%','30-40%','40-50%','50-60%','60-70%','>70%'],dc=['#cc2929','#a05050','#606060','#2a7a4a','#1a9e5c','#38c87a'];
+const mx=Math.max(...dk.map(k=>D.dist[k]||0));
+document.getElementById('dist-bars').innerHTML=dk.map((k,i)=>`<div class="dist-bar" style="height:${((D.dist[k]||0)/mx*100)}%;background:${dc[i]}">${D.dist[k]||0}</div>`).join('');
+document.getElementById('dist-lbls').innerHTML=dk.map(k=>`<div class="dist-lbl">${k}</div>`).join('');
+
+// Insights
+document.getElementById('overview-insights').innerHTML=`
+<div class="ins red"><p><strong>Headline:</strong> TMC lost <strong>${Math.abs(s.tmc_sw)}pp</strong>. CPM gained <strong>${s.cpm_sw}pp</strong>. BJP flat. Near-identical direct migration — almost none went to BJP.</p></div>
+<div class="ins red"><p><strong>Booth control collapse:</strong> TMC led <strong>${s.w21.TMC||0} booths</strong> in 2021 → <strong>${s.w24.TMC||0}</strong> in 2024. <strong>${s.tmc_cpm} booths reversed</strong> from TMC to CPM.</p></div>
+<div class="ins"><p><strong>Lead margin:</strong> Collapsed from <strong>${fi(s.lead21)} votes</strong> to <strong>${fi(s.lead24)}</strong> — a reduction of ${fi(s.lead21-s.lead24)} votes.</p></div>`;
+
+// Table builder
+function tbl(id,rows,cols){
+  document.getElementById(id).innerHTML=`<thead><tr>${cols.map(c=>`<th>${c.h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${c.f(r)}</td>`).join('')}</tr>`).join('')}</tbody>`;
 }
-
-loadAssemblies();
+const base=[
+  {h:'2021 Booth',f:r=>`<b style="color:var(--accent)">${r[0]}</b>`},
+  {h:'2024 Unit', f:r=>`${r[1]}`},
+  {h:'Locality',  f:r=>`${r[21]||''}`},
+  {h:'TMC 2021%', f:r=>`<span class="tmc-c">${f1(r[2])}</span>`},
+  {h:'TMC 2024%', f:r=>`<span class="tmc-c">${f1(r[9])}</span>`},
+  {h:'CPM 2021%', f:r=>`<span class="cpm-c">${f1(r[3])}</span>`},
+  {h:'CPM 2024%', f:r=>`<span class="cpm-c">${f1(r[10])}</span>`},
+  {h:'TMC Swing', f:r=>sw(r[16])},
+  {h:'CPM Swing', f:r=>sw(r[17])},
+  {h:'2021',      f:r=>wc(r[19])},
+  {h:'2024',      f:r=>wc(r[20])},
+];
+tbl('tbl-tmc-cpm',D.tmc_cpm,base);
+tbl('tbl-cpm-tmc',D.cpm_tmc,base);
+document.getElementById('tmc-cpm-insight').innerHTML=`<p>Booth <strong style="color:var(--accent)">${D.tmc_cpm[0][0]}</strong> (${D.tmc_cpm[0][21]||''}) is the single worst: TMC fell ${f1(D.tmc_cpm[0][16])}pp while CPM gained ${f1(D.tmc_cpm[0][17])}pp.</p>`;
+document.getElementById('cpm-tmc-insight').innerHTML=`<p>Booth <strong style="color:var(--accent)">${D.cpm_tmc[0][0]}</strong> (${D.cpm_tmc[0][21]||''}) leads recovery: TMC gained ${f1(D.cpm_tmc[0][16])}pp. <strong>Study what worked here — it's the blueprint.</strong></p>`;
+const bjpCols=[
+  {h:'2021 Booth',f:r=>`<b style="color:var(--accent)">${r[0]}</b>`},
+  {h:'2024 Unit', f:r=>`${r[1]}`},
+  {h:'Locality',  f:r=>`${r[21]||''}`},
+  {h:'TMC 2021%', f:r=>`<span class="tmc-c">${f1(r[2])}</span>`},
+  {h:'CPM 2021%', f:r=>`<span class="cpm-c">${f1(r[3])}</span>`},
+  {h:'BJP 2021%', f:r=>`<span class="bjp-c">${f1(r[4])}</span>`},
+  {h:'BJP 2024%', f:r=>`<span class="bjp-c">${f1(r[11])}</span>`},
+  {h:'CPM Swing', f:r=>sw(r[17])},
+  {h:'BJP Swing', f:r=>sw(r[18])},
+];
+tbl('tbl-bjp-cpm',D.bjp_cpm,bjpCols);
+tbl('tbl-cpm-bjp',D.cpm_bjp,bjpCols);
+document.getElementById('cpm-bjp-insight-txt').textContent=`Booth ${D.cpm_bjp[0][0]} is anomalous: BJP surged from ${f1(D.cpm_bjp[0][4])}% to ${f1(D.cpm_bjp[0][11])}%. These pockets need on-ground investigation.`;
+const strCols=[
+  {h:'2021 Booth',f:r=>`<b style="color:var(--accent)">${r[0]}</b>`},
+  {h:'2024 Unit', f:r=>`${r[1]}`},
+  {h:'Locality',  f:r=>`${r[21]||''}`},
+  {h:'TMC 2024%', f:r=>`<b class="tmc-c">${f1(r[9])}</b>`},
+  {h:'CPM 2024%', f:r=>`<span class="cpm-c">${f1(r[10])}</span>`},
+  {h:'BJP 2024%', f:r=>`<span class="bjp-c">${f1(r[11])}</span>`},
+  {h:'TMC Swing', f:r=>sw(r[16])},
+  {h:'2021',      f:r=>wc(r[19])},
+];
+tbl('tbl-strong',D.strong,strCols);
+tbl('tbl-weak',D.weak,strCols);
+document.getElementById('weak-insight').innerHTML=`<p>Booth <strong style="color:var(--accent)">${D.weak[0][0]}</strong> (${D.weak[0][21]||''}) is TMC's deepest hole at ${f1(D.weak[0][9])}% share.</p>`;
+tbl('tbl-gains',D.gains,base);
+document.getElementById('losses-insight').innerHTML=`<p>Booth <strong style="color:var(--accent)">${D.losses[0][0]}</strong> leads the collapse at ${f1(D.losses[0][16])}pp loss.</p>`;
+tbl('tbl-losses',D.losses,base);
+tbl('tbl-recovery',D.recovery,[
+  {h:'2021 Booth',f:r=>`<b style="color:var(--accent)">${r[0]}</b>`},
+  {h:'2024 Unit', f:r=>`${r[1]}`},
+  {h:'Locality',  f:r=>`${r[21]||''}`},
+  {h:'TMC 2021%', f:r=>`<span class="tmc-c">${f1(r[2])}</span>`},
+  {h:'TMC 2024%', f:r=>`<span class="tmc-c">${f1(r[9])}</span>`},
+  {h:'CPM 2024%', f:r=>`<span class="cpm-c">${f1(r[10])}</span>`},
+  {h:'Gap',       f:r=>`<span class="neg">-${f1(r[10]-r[9])}</span>`},
+  {h:'TMC Swing', f:r=>sw(r[16])},
+  {h:'CPM Swing', f:r=>sw(r[17])},
+]);
+tbl('tbl-reversals',D.reversals,[
+  {h:'2021 Booth',f:r=>`<b style="color:var(--accent)">${r[0]}</b>`},
+  {h:'2024 Unit', f:r=>`${r[1]}`},
+  {h:'Locality',  f:r=>`${r[21]||''}`},
+  {h:'TMC 2021%', f:r=>`<span class="tmc-c">${f1(r[2])}</span>`},
+  {h:'TMC 2024%', f:r=>`<span class="tmc-c">${f1(r[9])}</span>`},
+  {h:'CPM 2024%', f:r=>`<span class="cpm-c">${f1(r[10])}</span>`},
+  {h:'CPM Gap',   f:r=>`<span class="neg">-${f1(r[10]-r[9])}</span>`},
+  {h:'TMC Swing', f:r=>sw(r[16])},
+]);
+document.getElementById('bjp-insight-txt').textContent=`BJP controls exactly ${s.w24.BJP||0} booths in 2024 — same as 2021. CPM is the primary threat in ${s.w24.CPM||0} of 280 booths.`;
+tbl('tbl-bjp',D.bjp_booths,[
+  {h:'2021 Booth',f:r=>`<b style="color:var(--accent)">${r[0]}</b>`},
+  {h:'2024 Unit', f:r=>`${r[1]}`},
+  {h:'Locality',  f:r=>`${r[21]||''}`},
+  {h:'TMC 2024%', f:r=>`<span class="tmc-c">${f1(r[9])}</span>`},
+  {h:'CPM 2024%', f:r=>`<span class="cpm-c">${f1(r[10])}</span>`},
+  {h:'BJP 2024%', f:r=>`<b class="bjp-c">${f1(r[11])}</b>`},
+  {h:'TMC Swing', f:r=>sw(r[16])},
+  {h:'BJP Swing', f:r=>sw(r[18])},
+]);
+document.getElementById('strat-grid').innerHTML=[
+  ['ic-r','① Understand the CPM Surge First',`CPM gained +${s.cpm_sw}pp — almost exactly what TMC lost. Before any campaign, do qualitative ground research in the top 10 reversal booths to understand why communities switched.`],
+  ['ic-g','② Replicate the Success Booths',`Booths ${D.cpm_tmc.slice(0,4).map(r=>r[0]).join(', ')} showed CPM→TMC conversion at scale. Study their local leadership and micro-issues resolved. Scale those approaches.`],
+  ['ic-a','③ Swing the 40–50% Belt',`75 booths have TMC between 40–50%. A +5pp shift in half of these flips 18–20 CPM-leading booths. Maximum marginal return.`],
+  ['ic-g','④ Fortify the 26 Fortress Booths (>70%)',`Don't assume these are safe — 5 fell more than 10pp despite still leading. Active maintenance required.`],
+  ['ic-r','⑤ CPM is the Primary Threat',`CPM leads in ${s.w24.CPM||0} of 280 booths. BJP leads only ${s.w24.BJP||0}. Any model treating BJP as the main rival misdeploys resources.`],
+  ['ic-a','⑥ The 11 BJP Booths — Contain, Don\u2019t Contest',`TMC is a distant third in most. Prevent expansion; don\u2019t invest heavily.`],
+  ['ic-b','⑦ Room for Improvement',`Recovering just 25% of the ${fi(s.lead21-s.lead24)} lost votes would require converting 15–18 of the 66 reversal booths — a focused, achievable 2026 target.`],
+  ['ic-b','⑧ BJP→CPM Consolidation Risk',`Former BJP voters are choosing CPM as the challenger. A narrative targeting swing-away BJP voters could intercept some before they consolidate further.`],
+].map(([ic,h,p])=>`<div class="strat-card"><h4><span class="ic ${ic}"></span>${h}</h4><p>${p}</p></div>`).join('');
+document.getElementById('strat-summary').innerHTML=`<strong>Bottom line for 2026:</strong> TMC's challenge is CPM, not BJP. The 66 reversal booths are the battleground. Understanding why specific localities switched — then applying what worked in the 12 CPM→TMC conversion booths — is the path to recovery.`;
 </script>
 </body>
 </html>
